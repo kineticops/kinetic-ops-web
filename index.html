@@ -77,6 +77,13 @@
     </style>
 </head>
 <body class="font-sans bg-white text-brand-primary overflow-x-hidden selection:bg-brand-secondary selection:text-brand-primary">
+    <!-- ==================== BARRA OFERTA LIMITADA ==================== -->
+    <div class="w-full bg-gradient-to-r from-red-600 via-red-500 to-orange-500 text-white text-center py-2.5 px-4 text-[12px] font-bold tracking-wide z-[60] relative">
+        <span class="pulse-urgency inline-block mr-2">🔥</span>
+        OFERTA LIMITADA · Solo quedan <strong class="underline">5 plazas</strong> este mes · El precio sube el 1 de mayo
+        <span class="pulse-urgency inline-block ml-2">🔥</span>
+    </div>
+
     <div class="min-h-screen flex flex-col">
 
         <!-- ==================== NAV ==================== -->
@@ -161,13 +168,13 @@
                             <source src="VIDEO FINAL LANDING.mp4" type="video/mp4">
                         </video>
                         <!-- Poster overlay -->
-                        <div id="video-poster" class="absolute inset-0 flex flex-col items-center justify-center cursor-pointer" style="background-image: url('Thumbnail del vídeo .jpg'); background-size: cover; background-position: center;" onclick="document.getElementById('hero-video').play(); this.style.display='none';">
+                        <div id="video-poster" class="absolute inset-0 flex flex-col items-end md:items-center justify-end md:justify-center cursor-pointer pb-6 md:pb-0" style="background-image: url('Thumbnail del vídeo .jpg'); background-size: cover; background-position: center;" onclick="document.getElementById('hero-video').play(); this.style.display='none';">
                             <div class="absolute inset-0 bg-black/30"></div>
-                            <div class="relative w-16 h-16 rounded-full bg-white/20 border-2 border-white/50 flex items-center justify-center mb-5 hover:scale-110 hover:bg-white/35 transition-all duration-300 shadow-lg backdrop-blur-sm">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"></path></svg>
+                            <div class="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/20 border-2 border-white/50 flex items-center justify-center md:mb-5 mr-4 md:mr-0 hover:scale-110 hover:bg-white/35 transition-all duration-300 shadow-lg backdrop-blur-sm">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"></path></svg>
                             </div>
-                            <h3 class="relative text-white text-lg md:text-2xl font-extrabold tracking-tight text-center px-6 drop-shadow-lg">Mira cómo trabaja tu recepcionista IA</h3>
-                            <p class="relative text-white/70 text-sm mt-2 tracking-widest uppercase drop-shadow">Reproducir demo</p>
+                            <h3 class="hidden md:block relative text-white text-lg md:text-2xl font-extrabold tracking-tight text-center px-6 drop-shadow-lg">Mira cómo trabaja tu recepcionista IA</h3>
+                            <p class="hidden md:block relative text-white/70 text-sm mt-2 tracking-widest uppercase drop-shadow">Reproducir demo</p>
                         </div>
                     </div>
                 </div>
@@ -363,12 +370,28 @@
             <section id="precios" class="py-20 md:py-28 bg-[#F4F6FF] px-6">
                 <div class="max-w-[1100px] mx-auto text-center">
                     <div class="animate-reveal mb-6">
-                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-100 text-[11px] font-bold uppercase tracking-[0.15em] text-red-500 mb-6">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-100 text-[11px] font-bold uppercase tracking-[0.15em] text-red-500 mb-4">
                             <span class="w-1.5 h-1.5 rounded-full bg-red-500 pulse-urgency"></span>
                             Precios de lanzamiento · Subirán pronto
                         </div>
                         <h2 class="text-3xl md:text-5xl font-extrabold text-brand-primary tracking-tighter mb-4">Elige tu plan.</h2>
                         <p class="text-slate-500 max-w-xl mx-auto">Invierte menos de lo que pierdes en un solo cliente que no viene.</p>
+                        <!-- Urgencia de plazas -->
+                        <div class="mt-6 inline-flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-2xl px-5 py-3 shadow-sm">
+                            <div class="flex gap-1">
+                                <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
+                                <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
+                                <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
+                                <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
+                                <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
+                                <span class="w-3 h-3 rounded-full bg-slate-200"></span>
+                                <span class="w-3 h-3 rounded-full bg-slate-200"></span>
+                                <span class="w-3 h-3 rounded-full bg-slate-200"></span>
+                                <span class="w-3 h-3 rounded-full bg-slate-200"></span>
+                                <span class="w-3 h-3 rounded-full bg-slate-200"></span>
+                            </div>
+                            <p class="text-[13px] font-bold text-slate-700">Solo <span class="text-red-500">5 plazas</span> disponibles este mes · <span class="text-slate-400 font-medium">5 ya ocupadas</span></p>
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[860px] mx-auto mt-14">
 
