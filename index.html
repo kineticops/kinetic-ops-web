@@ -33,6 +33,9 @@
         @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); } 70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
         .pulse-urgency { animation: pulse-u 2s infinite; }
         @keyframes pulse-u { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+        @keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .text-gradient-green { background: linear-gradient(90deg, #22C55E, #34d399, #06b6d4, #22C55E); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradient-shift 3s linear infinite; }
+        .text-gradient-red { background: linear-gradient(90deg, #EF4444, #f97316, #dc2626, #EF4444); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradient-shift 3s linear infinite; }
         .marquee-track-left { display: flex; animation: marquee-l 45s linear infinite; width: max-content; }
         .marquee-track-right { display: flex; animation: marquee-r 45s linear infinite; width: max-content; }
         @keyframes marquee-l { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -67,7 +70,7 @@
         .hero-orb-2 { width: 300px; height: 300px; background: rgba(59,130,246,0.06); bottom: -5%; left: -5%; animation: orb-float 15s ease-in-out infinite 3s; }
         @keyframes orb-float { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.1); } }
         /* Stat number glow pulse */
-        .stat-number { text-shadow: 0 0 10px currentColor; opacity: 0.95; }
+        .stat-number { opacity: 0.95; }
         /* Logo hover */
         .logo-hover { transition: transform 0.3s ease; }
         .logo-hover:hover { transform: scale(1.05); }
@@ -78,16 +81,15 @@
 </head>
 <body class="font-sans bg-white text-brand-primary overflow-x-hidden selection:bg-brand-secondary selection:text-brand-primary">
     <!-- ==================== BARRA OFERTA LIMITADA ==================== -->
-    <div class="w-full bg-gradient-to-r from-red-600 via-red-500 to-orange-500 text-white text-center py-2.5 px-4 text-[12px] font-bold tracking-wide z-[60] relative">
-        <span class="pulse-urgency inline-block mr-2">🔥</span>
-        OFERTA LIMITADA · Solo quedan <strong class="underline">5 plazas</strong> este mes · El precio sube el 1 de mayo
-        <span class="pulse-urgency inline-block ml-2">🔥</span>
+    <div class="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-red-600 via-red-500 to-orange-500 text-white text-center py-1.5 px-4">
+        <p class="text-[11px] md:text-[12px] font-bold tracking-wide leading-tight">OFERTA LIMITADA · Solo quedan <strong class="underline">5 plazas</strong> este mes</p>
+        <p class="text-[10px] md:text-[11px] font-medium tracking-wide opacity-90">El precio sube el 1 de mayo</p>
     </div>
 
     <div class="min-h-screen flex flex-col">
 
         <!-- ==================== NAV ==================== -->
-        <nav class="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-5 transition-all duration-500" id="main-nav">
+        <nav class="fixed top-[52px] left-0 right-0 z-50 px-4 md:px-6 py-3 transition-all duration-500" id="main-nav">
             <div class="nav-inner max-w-[1200px] mx-auto flex items-center justify-between bg-white/85 backdrop-blur-xl border border-slate-200/50 px-6 md:px-8 py-3.5 rounded-full shadow-lg transition-all duration-500">
                 <a href="#" class="text-lg md:text-xl font-extrabold text-brand-primary tracking-tighter flex items-center gap-2.5 logo-hover">
                     <div class="w-9 h-9 bg-brand-primary rounded-xl flex items-center justify-center shadow-sm overflow-hidden">
@@ -123,23 +125,22 @@
         <main class="flex-grow">
 
             <!-- ==================== HERO ==================== -->
-            <section class="px-6 relative overflow-hidden pt-36 md:pt-44 pb-16 md:pb-24 text-center bg-gradient-to-br from-[#F4F6FF] via-[#F0F3FF] to-[#F9F9F9]">
+            <section class="px-6 relative overflow-hidden pt-44 md:pt-52 pb-16 md:pb-24 text-center bg-gradient-to-br from-[#F4F6FF] via-[#F0F3FF] to-[#F9F9F9]">
                 <!-- Floating orbs -->
                 <div class="hero-orb hero-orb-1"></div>
                 <div class="hero-orb hero-orb-2"></div>
                 <div class="max-w-[900px] mx-auto relative z-10">
 
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-100 text-[11px] font-bold uppercase tracking-[0.15em] text-red-500 mb-6 animate-reveal stagger-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-500 pulse-urgency"></span>
-                        🔥 Oferta de lanzamiento · Plazas limitadas
-                    </div>
-                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-brand-primary tracking-tighter leading-[1.05] mb-8 animate-reveal stagger-2">
-                        Tu negocio no duerme.<br>Tu WhatsApp, <span class="text-brand-secondary">ahora tampoco.</span>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-brand-primary tracking-tighter leading-[1.05] mb-8 animate-reveal stagger-1">
+                        Tu negocio no duerme.<br>Tu WhatsApp,<br><span class="text-gradient-green">ahora tampoco.</span>
                     </h1>
-                    <p class="text-base md:text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed animate-reveal stagger-3">
-                        Implementa un recepcionista con IA que agenda, gestiona y optimiza tu tiempo las 24/7. Deja de perder ingresos por mensajes no leídos.
+                    <p class="text-base md:text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed animate-reveal stagger-2">
+                        Implementa un recepcionista con IA<br class="hidden sm:block">
+                        que agenda, gestiona y optimiza tu tiempo las 24/7.<br>
+                        Deja de perder ingresos<br class="hidden sm:block">
+                        por mensajes no leídos.
                     </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-reveal stagger-4">
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-reveal stagger-3">
                         <a href="#demo-video" class="bg-brand-primary text-white px-7 py-3.5 rounded-full font-bold shadow-lg hover:bg-slate-800 transition-all flex items-center gap-3 text-[14px]">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
                             Ver Demostración en Vídeo
@@ -175,8 +176,7 @@
                             <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent"></div>
                             <!-- Texto abajo a la izquierda -->
                             <div class="absolute bottom-4 left-4 right-16">
-                                <p class="text-white font-bold text-sm md:text-base drop-shadow-lg leading-tight">Mira cómo trabaja tu recepcionista IA</p>
-                                <p class="text-white/60 text-[10px] md:text-xs mt-0.5 tracking-widest uppercase">Reproducir demo</p>
+                                <p class="text-white font-bold text-sm md:text-base drop-shadow-lg leading-tight">Mira cómo trabaja<br>tu recepcionista IA</p>
                             </div>
                             <!-- Botón play: esquina inferior derecha -->
                             <div class="absolute bottom-4 right-4 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 flex items-center justify-center hover:scale-110 hover:bg-white transition-all duration-300 shadow-xl">
@@ -247,9 +247,8 @@
             <section id="problema" class="py-20 md:py-28 bg-[#F9F9F9] px-6">
                 <div class="max-w-[1100px] mx-auto">
                     <div class="text-center mb-16 animate-reveal">
-                        <p class="text-red-500 text-[12px] font-bold uppercase tracking-[0.2em] mb-4">⚠️ ¿Sabías que...?</p>
-                        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tighter mb-4">Cada día sin IA, <span class="text-red-500">pierdes dinero.</span></h2>
-                        <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">Estas son las pérdidas reales de un negocio que gestiona citas de forma manual.</p>
+                        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tighter mb-4">Cada día sin IA,<br><span class="text-gradient-red">pierdes dinero.</span></h2>
+                        <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">Estas son las pérdidas reales<br>de un negocio que gestiona citas<br class="hidden sm:block">de forma manual.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="counter-card bg-gradient-to-br from-red-50 to-white rounded-3xl p-8 border border-red-100 animate-reveal stagger-1 transition-all duration-500 hover:shadow-xl cursor-default">
@@ -377,15 +376,13 @@
             <section id="precios" class="py-20 md:py-28 bg-[#F4F6FF] px-6">
                 <div class="max-w-[1100px] mx-auto text-center">
                     <div class="animate-reveal mb-6">
-                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-100 text-[11px] font-bold uppercase tracking-[0.15em] text-red-500 mb-4">
-                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 pulse-urgency"></span>
-                            Precios de lanzamiento · Subirán pronto
-                        </div>
                         <h2 class="text-3xl md:text-5xl font-extrabold text-brand-primary tracking-tighter mb-4">Elige tu plan.</h2>
-                        <p class="text-slate-500 max-w-xl mx-auto">Invierte menos de lo que pierdes en un solo cliente que no viene.</p>
+                        <p class="text-slate-500 max-w-xl mx-auto">Invierte menos de lo que pierdes<br>en un solo cliente que no viene.</p>
                         <!-- Urgencia de plazas -->
                         <div class="mt-6 inline-flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-2xl px-5 py-3 shadow-sm">
                             <div class="flex gap-1">
+                                <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
+                                <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
                                 <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
                                 <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
                                 <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
@@ -397,7 +394,7 @@
                                 <span class="w-3 h-3 rounded-full bg-slate-200"></span>
                                 <span class="w-3 h-3 rounded-full bg-slate-200"></span>
                             </div>
-                            <p class="text-[13px] font-bold text-slate-700">Solo <span class="text-red-500">5 plazas</span> disponibles este mes · <span class="text-slate-400 font-medium">5 ya ocupadas</span></p>
+                            <p class="text-[13px] font-bold text-slate-700">Solo <span class="text-red-500">5 plazas</span> disponibles este mes · <span class="text-slate-400 font-medium">7 ya ocupadas</span></p>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[860px] mx-auto mt-14">
@@ -464,7 +461,6 @@
                         <div class="bg-red-50/50 rounded-3xl p-8 md:p-10 border-2 border-red-100">
                             <div class="text-red-500 font-bold text-sm uppercase tracking-widest mb-8 flex items-center gap-2">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                                Sin Kinetic Ops
                             </div>
                             <ul class="space-y-5">
                                 <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>Tu empleado se pone enfermo y <strong class="text-slate-700">nadie responde al teléfono</strong></span></li>
@@ -479,7 +475,6 @@
                         <div class="bg-emerald-50/50 rounded-3xl p-8 md:p-10 border-2 border-emerald-200 shadow-[0_0_40px_rgba(34,197,94,0.08)]">
                             <div class="text-brand-secondary font-bold text-sm uppercase tracking-widest mb-8 flex items-center gap-2">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                Con Kinetic Ops
                             </div>
                             <ul class="space-y-5">
                                 <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span>La IA <strong>nunca enferma</strong>, nunca falta, nunca tiene un mal día</span></li>
@@ -585,7 +580,7 @@
                                 <svg class="shrink-0 w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
                             </summary>
                             <div class="px-6 md:px-8 pb-6 md:pb-8 text-slate-600 text-sm leading-relaxed">
-                                <p>El pago único de Setup cubre: <strong class="text-brand-primary">configuración completa del sistema</strong>, integración con tu calendario y herramientas, personalización de la IA con tus productos y servicios, pruebas de calidad y puesta en marcha. Todo listo en <strong>menos de 48 horas</strong>.</p>
+                                <p>El pago único de Setup cubre: <strong class="text-brand-primary">configuración completa del sistema</strong>,<br>integración con tu calendario y herramientas,<br>personalización de la IA con tus productos y servicios,<br>pruebas de calidad y puesta en marcha.</p>
                             </div>
                         </details>
 
@@ -691,7 +686,7 @@
                         </div>
                     </div>
 
-                    <p class="text-white/20 text-[11px]">Respondemos en menos de 24 horas laborables. Tu negocio nos importa.</p>
+                    <p class="text-white/60 text-[13px]">Respondemos en menos de 24 horas laborables.<br>Tu negocio nos importa.</p>
                 </div>
             </section>
 
@@ -818,7 +813,7 @@
         (() => {
             const counter = document.getElementById('live-counter');
             if (!counter) return;
-            const nums = [3, 5, 2, 7, 4, 6, 8, 3, 5, 9];
+            const nums = [847, 1243, 956, 1872, 634, 1105, 2341, 789, 1467, 1038];
             let idx = 0;
             setInterval(() => {
                 idx = (idx + 1) % nums.length;
