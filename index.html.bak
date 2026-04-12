@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinetic Ops | Recuperación de Ingresos con IA</title>
+    <meta name="description" content="Implementa un recepcionista con IA que agenda, gestiona y optimiza tu tiempo las 24/7. Deja de perder ingresos por mensajes no leídos.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { primary: '#1A1F2C', secondary: '#22C55E', accent: '#F8FAFC' },
+                    },
+                    fontFamily: { sans: ['"Inter Tight"', 'system-ui', '-apple-system', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter Tight', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+        [id] { scroll-margin-top: 100px; }
+        .animate-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+        .animate-reveal-visible { opacity: 1; transform: translateY(0); }
+        .stagger-1 { transition-delay: 0.1s; } .stagger-2 { transition-delay: 0.2s; } .stagger-3 { transition-delay: 0.3s; } .stagger-4 { transition-delay: 0.4s; } .stagger-5 { transition-delay: 0.5s; }
+        .nav-scrolled { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
+        .nav-scrolled .nav-inner { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; box-shadow: 0 4px 30px rgba(0,0,0,0.1) !important; }
+        .pulse-ai { animation: pulse-green 2s infinite; }
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); } 70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+        .pulse-urgency { animation: pulse-u 2s infinite; }
+        @keyframes pulse-u { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+        .marquee-track-left { display: flex; animation: marquee-l 45s linear infinite; width: max-content; }
+        .marquee-track-right { display: flex; animation: marquee-r 45s linear infinite; width: max-content; }
+        @keyframes marquee-l { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes marquee-r { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+        .price-old { position: relative; color: #94a3b8; }
+        .price-old::after { content:''; position:absolute; left:-4px; right:-4px; top:50%; height:2px; background:#EF4444; transform:rotate(-8deg); }
+        #chat-container::-webkit-scrollbar { width: 4px; }
+        #chat-container::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
+        .stars { color: #F59E0B; letter-spacing: 2px; }
+        .counter-card { position: relative; overflow: hidden; }
+        .counter-card:hover { transform: translateY(-4px); }
+        .pricing-card { transition: all 0.4s cubic-bezier(0.22,1,0.36,1); transform-style: preserve-3d; }
+        .pricing-card:hover { transform: translateY(-8px) scale(1.03) rotateX(2deg) rotateY(-1deg); box-shadow: 0 25px 60px -12px rgba(0,0,0,0.3); }
+        .pricing-card-popular:hover { transform: translateY(-10px) scale(1.07) rotateX(2deg) rotateY(-1deg); box-shadow: 0 30px 70px -10px rgba(34,197,94,0.3); }
+        .pricing-card-premium:hover { transform: translateY(-10px) scale(1.05) rotateX(2deg) rotateY(1deg); box-shadow: 0 30px 70px -10px rgba(251,191,36,0.25); }
+        .cta-bg { position: relative; overflow: hidden; background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%); }
+        .cta-bg::before { content:''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 50%, rgba(34,197,94,0.08) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(59,130,246,0.06) 0%, transparent 50%); animation: cta-glow 8s ease-in-out infinite alternate; }
+        @keyframes cta-glow { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(2%,-3%) scale(1.05); } }
+        .cta-particle { position: absolute; border-radius: 50%; pointer-events: none; }
+        .cta-particle-1 { width: 6px; height: 6px; background: rgba(34,197,94,0.3); top: 15%; left: 10%; animation: float-p 6s ease-in-out infinite; }
+        .cta-particle-2 { width: 4px; height: 4px; background: rgba(59,130,246,0.3); top: 70%; left: 80%; animation: float-p 8s ease-in-out infinite 1s; }
+        .cta-particle-3 { width: 8px; height: 8px; background: rgba(251,191,36,0.2); top: 30%; left: 75%; animation: float-p 7s ease-in-out infinite 2s; }
+        .cta-particle-4 { width: 5px; height: 5px; background: rgba(34,197,94,0.2); top: 75%; left: 25%; animation: float-p 9s ease-in-out infinite 0.5s; }
+        .cta-particle-5 { width: 3px; height: 3px; background: rgba(255,255,255,0.15); top: 50%; left: 50%; animation: float-p 5s ease-in-out infinite 3s; }
+        @keyframes float-p { 0%,100% { transform: translateY(0) translateX(0); opacity: 0.4; } 25% { transform: translateY(-20px) translateX(10px); opacity: 1; } 50% { transform: translateY(-10px) translateX(-15px); opacity: 0.6; } 75% { transform: translateY(-25px) translateX(5px); opacity: 0.8; } }
+        .contact-card { transition: all 0.4s cubic-bezier(0.22,1,0.36,1); }
+        .contact-card:hover { transform: translateY(-6px) scale(1.02); }
+        .contact-card:hover .card-glow { opacity: 1; }
+        /* Hero floating orbs */
+        .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
+        .hero-orb-1 { width: 400px; height: 400px; background: rgba(34,197,94,0.08); top: -10%; right: -5%; animation: orb-float 12s ease-in-out infinite; }
+        .hero-orb-2 { width: 300px; height: 300px; background: rgba(59,130,246,0.06); bottom: -5%; left: -5%; animation: orb-float 15s ease-in-out infinite 3s; }
+        @keyframes orb-float { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px,-20px) scale(1.1); } }
+        /* Stat number glow pulse */
+        .stat-number { text-shadow: 0 0 10px currentColor; opacity: 0.95; }
+        /* Logo hover */
+        .logo-hover { transition: transform 0.3s ease; }
+        .logo-hover:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body class="font-sans bg-white text-brand-primary overflow-x-hidden selection:bg-brand-secondary selection:text-brand-primary">
+    <div class="min-h-screen flex flex-col">
+
+        <!-- ==================== NAV ==================== -->
+        <nav class="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-5 transition-all duration-500" id="main-nav">
+            <div class="nav-inner max-w-[1200px] mx-auto flex items-center justify-between bg-white/85 backdrop-blur-xl border border-slate-200/50 px-6 md:px-8 py-3.5 rounded-full shadow-lg transition-all duration-500">
+                <a href="#" class="text-lg md:text-xl font-extrabold text-brand-primary tracking-tighter flex items-center gap-2.5 logo-hover">
+                    <div class="w-9 h-9 bg-brand-primary rounded-xl flex items-center justify-center shadow-sm overflow-hidden">
+                        <img src="logo-kinetic.png" alt="Kinetic Ops" class="w-7 h-7 object-contain">
+                    </div>
+                    <span>Kinetic <span class="text-[#5b7fbf]">Ops</span></span>
+                </a>
+                <div class="hidden md:flex items-center gap-10 text-[12px] font-semibold uppercase tracking-[0.15em] text-slate-400">
+                    <a href="#problema" class="hover:text-brand-primary transition-colors">Pérdidas</a>
+                    <a href="#demo" class="hover:text-brand-primary transition-colors">Sistema</a>
+                    <a href="#precios" class="hover:text-brand-primary transition-colors">Precios</a>
+                    <a href="#sectores" class="hover:text-brand-primary transition-colors">Sectores</a>
+                </div>
+                <a href="https://wa.me/34658390284" class="bg-brand-primary text-white px-5 py-2.5 rounded-full text-[12px] font-bold hover:bg-slate-800 transition-all shadow-lg">Empieza ahora</a>
+            </div>
+        </nav>
+
+        <main class="flex-grow">
+
+            <!-- ==================== HERO ==================== -->
+            <section class="px-6 relative overflow-hidden pt-36 md:pt-44 pb-16 md:pb-24 text-center">
+                <!-- Floating orbs -->
+                <div class="hero-orb hero-orb-1"></div>
+                <div class="hero-orb hero-orb-2"></div>
+                <div class="max-w-[900px] mx-auto relative z-10">
+
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-100 text-[11px] font-bold uppercase tracking-[0.15em] text-red-500 mb-6 animate-reveal stagger-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-500 pulse-urgency"></span>
+                        🔥 Oferta de lanzamiento · Plazas limitadas
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-brand-primary tracking-tighter leading-[1.05] mb-8 animate-reveal stagger-2">
+                        Tu negocio no duerme.<br>Tu WhatsApp, <span class="text-brand-secondary">ahora tampoco.</span>
+                    </h1>
+                    <p class="text-base md:text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed animate-reveal stagger-3">
+                        Implementa un recepcionista con IA que agenda, gestiona y optimiza tu tiempo las 24/7. Deja de perder ingresos por mensajes no leídos.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-reveal stagger-4">
+                        <a href="#demo-video" class="bg-brand-primary text-white px-7 py-3.5 rounded-full font-bold shadow-lg hover:bg-slate-800 transition-all flex items-center gap-3 text-[14px]">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                            Ver Demostración en Vídeo
+                        </a>
+                        <a href="https://wa.me/34658390284" class="bg-white border border-slate-200 text-brand-primary px-7 py-3.5 rounded-full font-bold hover:bg-slate-50 transition-all text-[14px]">Consultar disponibilidad</a>
+                    </div>
+                    <div class="mt-8 flex items-center justify-center gap-3 animate-reveal stagger-5">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white flex items-center justify-center text-white text-[10px] font-bold">MR</div>
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 border-2 border-white flex items-center justify-center text-white text-[10px] font-bold">LC</div>
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white flex items-center justify-center text-white text-[10px] font-bold">AP</div>
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 border-2 border-white flex items-center justify-center text-white text-[10px] font-bold">JT</div>
+                        </div>
+                        <div class="text-left">
+                            <div class="stars text-xs">★★★★★</div>
+                            <p class="text-[11px] text-slate-400"><strong class="text-slate-600">+120 negocios</strong> ya automatizan con IA</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="demo-video" class="animate-reveal stagger-5 relative max-w-[900px] mx-auto mt-16">
+                    <div class="relative aspect-video bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 group cursor-pointer">
+                        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+                            <div class="flex flex-col items-center">
+                                <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center border border-white/20 mb-4 group-hover:scale-110 group-hover:bg-white/20 transition-all duration-500">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"></path></svg>
+                                </div>
+                                <span class="text-white/40 text-sm font-medium tracking-widest uppercase">Video Demo IA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== INTEGRACIONES (COLORES REALES) ==================== -->
+            <section class="py-10 bg-white border-y border-slate-100">
+                <div class="max-w-[1000px] mx-auto px-6">
+                    <p class="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-300 mb-8">Integrado con las herramientas que ya usas</p>
+                    <div class="flex flex-wrap items-center justify-center gap-8 md:gap-14">
+                        <!-- Google Calendar -->
+                        <div class="flex items-center gap-2.5">
+                            <svg width="26" height="26" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" fill="#fff" stroke="#4285F4" stroke-width="1.5"/>
+                                <path d="M3 9h18" stroke="#4285F4" stroke-width="1.5"/>
+                                <path d="M9 4V2M15 4V2" stroke="#4285F4" stroke-width="1.5" stroke-linecap="round"/>
+                                <rect x="7" y="12" width="3" height="3" rx="0.5" fill="#EA4335"/>
+                                <rect x="14" y="12" width="3" height="3" rx="0.5" fill="#34A853"/>
+                            </svg>
+                            <span class="text-sm font-bold text-[#4285F4]">Google Calendar</span>
+                        </div>
+                        <!-- Google Sheets -->
+                        <div class="flex items-center gap-2.5">
+                            <svg width="26" height="26" viewBox="0 0 24 24">
+                                <rect x="4" y="2" width="16" height="20" rx="2" fill="#fff" stroke="#0F9D58" stroke-width="1.5"/>
+                                <path d="M8 10h8M8 14h8M8 18h5" stroke="#0F9D58" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M12 10v8" stroke="#0F9D58" stroke-width="1.5"/>
+                            </svg>
+                            <span class="text-sm font-bold text-[#0F9D58]">Google Sheets</span>
+                        </div>
+                        <!-- WhatsApp -->
+                        <div class="flex items-center gap-2.5">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.243-1.214l-.307-.184-2.87.852.852-2.87-.184-.307A8 8 0 1112 20z"/></svg>
+                            <span class="text-sm font-bold text-[#25D366]">WhatsApp</span>
+                        </div>
+                        <!-- Outlook -->
+                        <div class="flex items-center gap-2.5">
+                            <svg width="26" height="26" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="#fff" stroke="#0078D4" stroke-width="1.5"/><path d="M3 7l9 5 9-5" stroke="#0078D4" stroke-width="1.5"/></svg>
+                            <span class="text-sm font-bold text-[#0078D4]">Outlook</span>
+                        </div>
+                        <!-- Gmail -->
+                        <div class="flex items-center gap-2.5">
+                            <svg width="26" height="26" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" fill="#fff" stroke="#EA4335" stroke-width="1.5"/><path d="M2 6l10 7 10-7" stroke="#EA4335" stroke-width="1.5" stroke-linecap="round"/></svg>
+                            <span class="text-sm font-bold text-[#EA4335]">Gmail</span>
+                        </div>
+                        <!-- Calendly -->
+                        <div class="flex items-center gap-2.5">
+                            <svg width="26" height="26" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fff" stroke="#006BFF" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="#006BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="text-sm font-bold text-[#006BFF]">Calendly</span>
+                        </div>
+                        <!-- HubSpot -->
+                        <div class="flex items-center gap-2.5">
+                            <svg width="26" height="26" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="#FF7A59"/><circle cx="18" cy="6" r="2" fill="#FF7A59"/><circle cx="6" cy="18" r="2" fill="#FF7A59"/><path d="M14.5 9.5l2-2M9.5 14.5l-2 2" stroke="#FF7A59" stroke-width="1.5"/></svg>
+                            <span class="text-sm font-bold text-[#FF7A59]">HubSpot</span>
+                        </div>
+                        <!-- Airtable -->
+                        <div class="flex items-center gap-2.5">
+                            <svg width="26" height="26" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="#fff" stroke="#18BFFF" stroke-width="1.5"/><path d="M3 10h18" stroke="#18BFFF" stroke-width="1.5"/><path d="M3 15h18" stroke="#18BFFF" stroke-width="1"/><path d="M10 10v9" stroke="#FCB400" stroke-width="1.5"/></svg>
+                            <span class="text-sm font-bold text-[#18BFFF]">Airtable</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== MARCAS DE CONFIANZA (COLORES REALES) ==================== -->
+            <section class="py-12 bg-slate-50 border-b border-slate-100">
+                <div class="max-w-[1100px] mx-auto px-6">
+                    <p class="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-8">La misma tecnología que impulsa a los líderes del sector</p>
+                    <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+                        <!-- Vitaldent - Blue -->
+                        <div class="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 4c-1.5 0-2.5 1-3.5 2.5S6 10 6 12c0 3.5 2.5 8 6 8s6-4.5 6-8c0-2-1.5-4-2.5-5.5S13.5 4 12 4z" fill="#0058A3"/></svg>
+                            <span class="text-lg font-extrabold tracking-tight text-[#0058A3]">Vitaldent</span>
+                        </div>
+                        <!-- Sanitas - Blue -->
+                        <div class="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l2 4h4l-3 3 1 5-4-2-4 2 1-5-3-3h4l2-4z" fill="#003DA5"/></svg>
+                            <span class="text-lg font-extrabold tracking-tight text-[#003DA5]">Sanitas</span>
+                        </div>
+                        <!-- Quirónsalud - Teal -->
+                        <div class="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2v8H4v4h8v8h4v-8h8v-4h-8V2h-4z" fill="#00857C"/></svg>
+                            <span class="text-lg font-extrabold tracking-tight text-[#00857C]">Quirónsalud</span>
+                        </div>
+                        <!-- Jeff - Orange -->
+                        <div class="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#FF6B00"/><path d="M8 12h8M12 8v8" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+                            <span class="text-lg font-extrabold tracking-tight text-[#FF6B00]">Jeff</span>
+                        </div>
+                        <!-- Century 21 - Gold -->
+                        <div class="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 21h18l-9-18L3 21z" fill="#C5A253" stroke="#8B7335" stroke-width="0.5"/></svg>
+                            <span class="text-lg font-extrabold tracking-tight text-[#C5A253]">Century 21</span>
+                        </div>
+                        <!-- Multiópticas - Red -->
+                        <div class="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                            <svg width="24" height="20" viewBox="0 0 24 20" fill="none"><circle cx="7" cy="10" r="5" stroke="#E2001A" stroke-width="1.5" fill="none"/><circle cx="17" cy="10" r="5" stroke="#E2001A" stroke-width="1.5" fill="none"/><path d="M12 10c0-2 1-3 2-3M12 10c0-2-1-3-2-3" stroke="#E2001A" stroke-width="1.5"/></svg>
+                            <span class="text-lg font-extrabold tracking-tight text-[#E2001A]">Multiópticas</span>
+                        </div>
+                        <!-- Clínicas Dorsia - Purple -->
+                        <div class="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" fill="#7B2D8E"/></svg>
+                            <span class="text-lg font-extrabold tracking-tight text-[#7B2D8E]">Clínicas Dorsia</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== FRICCIÓN SILENCIOSA ==================== -->
+            <section id="problema" class="py-20 md:py-28 bg-white px-6">
+                <div class="max-w-[1100px] mx-auto">
+                    <div class="text-center mb-16 animate-reveal">
+                        <p class="text-red-500 text-[12px] font-bold uppercase tracking-[0.2em] mb-4">⚠️ ¿Sabías que...?</p>
+                        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tighter mb-4">Cada día sin IA, <span class="text-red-500">pierdes dinero.</span></h2>
+                        <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">Estas son las pérdidas reales de un negocio que gestiona citas de forma manual.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="counter-card bg-gradient-to-br from-red-50 to-white rounded-3xl p-8 border border-red-100 animate-reveal stagger-1 transition-all duration-500 hover:shadow-xl cursor-default">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 rounded-2xl bg-red-100 flex items-center justify-center">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <span class="text-[11px] font-bold uppercase tracking-widest text-red-300">Abandono</span>
+                            </div>
+                            <div class="text-red-500 font-extrabold text-6xl mb-3 tracking-tighter stat-number">78%</div>
+                            <h3 class="text-lg font-bold text-brand-primary mb-2">Clientes que no vuelven</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Si no respondes en <strong class="text-slate-600">5 minutos</strong>, se van a tu competencia y <strong class="text-red-400">nunca regresan</strong>.</p>
+                        </div>
+                        <div class="counter-card bg-gradient-to-br from-amber-50 to-white rounded-3xl p-8 border border-amber-100 animate-reveal stagger-2 transition-all duration-500 hover:shadow-xl cursor-default">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <span class="text-[11px] font-bold uppercase tracking-widest text-amber-300">Pérdidas</span>
+                            </div>
+                            <div class="text-amber-500 font-extrabold text-6xl mb-3 tracking-tighter stat-number">€4.8k</div>
+                            <h3 class="text-lg font-bold text-brand-primary mb-2">Euros que tiras a la basura</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Cada mes sin automatizar. <strong class="text-slate-600">Citas olvidadas + clientes perdidos</strong> = dinero que nunca recuperas.</p>
+                        </div>
+                        <div class="counter-card bg-gradient-to-br from-blue-50 to-white rounded-3xl p-8 border border-blue-100 animate-reveal stagger-3 transition-all duration-500 hover:shadow-xl cursor-default">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <span class="text-[11px] font-bold uppercase tracking-widest text-blue-300">Tiempo</span>
+                            </div>
+                            <div class="text-blue-500 font-extrabold text-6xl mb-3 tracking-tighter stat-number">3.5h</div>
+                            <h3 class="text-lg font-bold text-brand-primary mb-2">Horas desperdiciadas al día</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Respondiendo mensajes y confirmando citas. <strong class="text-slate-600">Tiempo que podrías facturar.</strong></p>
+                        </div>
+                    </div>
+                    <div class="mt-10 text-center animate-reveal stagger-4">
+                        <div class="inline-flex items-center gap-3 bg-red-50 border border-red-100 rounded-full px-6 py-3">
+                            <span class="text-lg">💸</span>
+                            <p class="text-red-600 text-sm font-medium"><strong>¿Cuánto dinero has perdido ya hoy?</strong> Cada hora sin automatizar = oportunidades perdidas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== DEMO INTERACTIVA ==================== -->
+            <section id="demo" class="py-20 md:py-28 bg-slate-50">
+                <div class="max-w-[1200px] mx-auto px-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start">
+                        <div class="lg:col-span-4 animate-reveal lg:sticky lg:top-32">
+                            <h2 class="text-3xl md:text-4xl font-extrabold text-brand-primary tracking-tighter mb-6">Sincronización Inteligente.</h2>
+                            <p class="text-base text-slate-500 mb-6 leading-relaxed">Nuestro sistema no solo responde; <strong class="text-brand-primary">gestiona</strong>. Entiende el contexto, revisa tu disponibilidad y ajusta tu agenda en tiempo real.</p>
+                            <div class="space-y-3 mb-8">
+                                <div class="flex items-start gap-3 p-3 bg-white rounded-xl border border-slate-200">
+                                    <div class="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5"><path d="M12 2v20m10-10H2"></path></svg>
+                                    </div>
+                                    <div><p class="text-[13px] font-bold text-brand-primary">Conexión de Calendario</p><p class="text-[12px] text-slate-400">Sync con Google Calendar y Outlook.</p></div>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-white rounded-xl border border-slate-200">
+                                    <div class="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg>
+                                    </div>
+                                    <div><p class="text-[13px] font-bold text-brand-primary">Entrenamiento Personalizado</p><p class="text-[12px] text-slate-400">La IA aprende tus servicios y precios.</p></div>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-white rounded-xl border border-slate-200">
+                                    <div class="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    </div>
+                                    <div><p class="text-[13px] font-bold text-brand-primary">Registro en Google Sheets</p><p class="text-[12px] text-slate-400">Cada cita queda registrada automáticamente.</p></div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-5 animate-reveal stagger-3">
+                                <h4 class="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-3">📅 Agenda Hoy</h4>
+                                <div class="space-y-2">
+                                    <div id="slot-11" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-100 transition-all duration-500">
+                                        <span class="text-[11px] font-bold text-slate-400">11:00</span>
+                                        <span class="text-[11px] font-medium text-slate-300">Disponible</span>
+                                    </div>
+                                    <div id="slot-16" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-100 transition-all duration-500">
+                                        <span class="text-[11px] font-bold text-slate-400">16:00</span>
+                                        <span class="text-[11px] font-medium text-slate-300">Disponible</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-8 animate-reveal stagger-2">
+                            <div class="bg-white rounded-3xl shadow-lg border border-slate-200 overflow-hidden flex flex-col h-[520px]">
+                                <div class="p-4 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-brand-primary flex items-center justify-center">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <span class="text-xs font-bold text-brand-primary tracking-tight block">Kinetic Ops | Asistente IA</span>
+                                            <span class="text-[10px] text-slate-400">Responde en menos de 3 segundos</span>
+                                        </div>
+                                    </div>
+                                    <span class="w-2 h-2 rounded-full bg-brand-secondary pulse-ai"></span>
+                                </div>
+                                <div id="chat-container" class="flex-grow p-6 space-y-4 overflow-y-auto bg-white"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== SECTORES (AMBAS FILAS SIEMPRE VISIBLES) ==================== -->
+            <section id="sectores" class="py-16 md:py-20 bg-white overflow-hidden">
+                <div class="max-w-[1000px] mx-auto px-6 text-center mb-10 animate-reveal">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-brand-primary tracking-tighter mb-4">Funciona para tu negocio.</h2>
+                    <p class="text-slate-400 text-base">Más de <strong class="text-brand-primary">26 sectores</strong> diferentes ya confían en Kinetic Ops.</p>
+                </div>
+                <!-- Row 1: Left to Right -->
+                <div class="overflow-hidden mb-3">
+                    <div class="marquee-track-left" id="marquee-row-1"></div>
+                </div>
+                <!-- Row 2: Right to Left (inverse, always visible) -->
+                <div class="overflow-hidden">
+                    <div class="marquee-track-right" id="marquee-row-2"></div>
+                </div>
+            </section>
+
+            <!-- ==================== PRECIOS ==================== -->
+            <section id="precios" class="py-20 md:py-28 bg-slate-50 px-6">
+                <div class="max-w-[1100px] mx-auto text-center">
+                    <div class="animate-reveal mb-6">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-100 text-[11px] font-bold uppercase tracking-[0.15em] text-red-500 mb-6">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 pulse-urgency"></span>
+                            Precios de lanzamiento · Subirán pronto
+                        </div>
+                        <h2 class="text-3xl md:text-5xl font-extrabold text-brand-primary tracking-tighter mb-4">Elige tu plan.</h2>
+                        <p class="text-slate-500 max-w-xl mx-auto">Invierte menos de lo que pierdes en un solo cliente que no viene.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-14">
+
+                        <!-- LITE -->
+                        <div class="pricing-card bg-gradient-to-br from-[#e0f2fe] to-[#dbeafe] p-8 md:p-9 rounded-[32px] border border-sky-200 text-left animate-reveal stagger-1 flex flex-col shadow-md cursor-pointer">
+                            <div class="mb-6">
+                                <div class="inline-block px-3 py-1.5 rounded-full bg-sky-500/15 text-[10px] font-bold uppercase tracking-widest text-sky-700 mb-4">Lite</div>
+                                <h3 class="text-xl font-bold text-brand-primary mb-1">Recordatorios</h3>
+                                <p class="text-slate-500 text-[12px] font-semibold mb-1">Hasta 300 clientes/mes</p>
+                                <p class="text-slate-600 text-[13px] font-medium mb-5">Solo quiero reducir ausencias</p>
+                                <div class="flex items-baseline gap-2 mb-2">
+                                    <span class="price-old text-xl font-bold">79€</span>
+                                    <span class="text-4xl font-extrabold text-brand-primary tracking-tight">30€</span>
+                                    <span class="text-slate-600 text-sm font-semibold">/mes</span>
+                                </div>
+                                <div class="bg-white rounded-lg px-3 py-1.5 inline-block shadow-sm">
+                                    <p class="text-[12px] text-slate-700 font-medium">Setup único: <strong class="text-sky-700">147€</strong></p>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-center gap-3 text-[13px] text-slate-700"><svg class="text-brand-secondary shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Recordatorios WhatsApp 24h antes</li>
+                                <li class="flex items-center gap-3 text-[13px] text-slate-700"><svg class="text-brand-secondary shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Sincronización básica calendario</li>
+                                <li class="flex items-center gap-3 text-[13px] text-slate-400"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg><span class="line-through">Agente conversacional 24/7</span></li>
+                                <li class="flex items-center gap-3 text-[13px] text-slate-400"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg><span class="line-through">Agendamiento de citas</span></li>
+                                <li class="flex items-center gap-3 text-[13px] text-slate-400"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg><span class="line-through">Registro en Google Sheets</span></li>
+                            </ul>
+                            <a href="https://wa.me/34658390284?text=Hola!%20Me%20interesa%20el%20plan%20Lite" class="w-full py-3.5 rounded-full bg-white text-brand-primary font-bold text-center hover:bg-sky-50 transition-all text-[13px] block shadow-sm border border-sky-200">Activar Plan Lite</a>
+                        </div>
+
+                        <!-- AGENTE (POPULAR) -->
+                        <div class="pricing-card pricing-card-popular bg-gradient-to-br from-[#1a2e3d] to-[#0f2027] p-8 md:p-9 rounded-[32px] text-left animate-reveal stagger-2 shadow-2xl relative flex flex-col md:scale-105 z-10 cursor-pointer">
+                            <div class="absolute top-5 right-5 text-brand-secondary font-bold text-[10px] uppercase tracking-widest bg-brand-secondary/10 px-3 py-1 rounded-full border border-brand-secondary/20">Más Popular</div>
+                            <div class="mb-6">
+                                <div class="inline-block px-3 py-1 rounded-full bg-brand-secondary/10 text-[10px] font-bold uppercase tracking-widest text-brand-secondary mb-4">Agente</div>
+                                <h3 class="text-xl font-bold text-white mb-1">Automatización Completa</h3>
+                                <p class="text-white/50 text-[12px] font-semibold mb-1">Hasta 500 clientes/mes</p>
+                                <p class="text-white/60 text-[13px] font-medium mb-5">La agenda que trabaja por ti 24/7</p>
+                                <div class="flex items-baseline gap-2 mb-2">
+                                    <span class="price-old text-xl font-bold text-white/30">197€</span>
+                                    <span class="text-5xl font-extrabold text-white tracking-tight">90€</span>
+                                    <span class="text-white/60 text-sm font-semibold">/mes</span>
+                                </div>
+                                <div class="bg-white/10 rounded-lg px-3 py-1.5 inline-block">
+                                    <p class="text-[12px] text-white/70 font-medium">Setup único: <strong class="text-brand-secondary">200€</strong></p>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-brand-secondary shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Recordatorios WhatsApp 24h antes</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-brand-secondary shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Agente conversacional 24/7</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-brand-secondary shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Responde preguntas frecuentes</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-brand-secondary shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Agendamiento de citas automático</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-brand-secondary shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Registro automático en Sheets</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-brand-secondary shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Modificación y cancelación autónoma</li>
+                                <li class="flex items-center gap-3 text-[13px] text-brand-secondary font-bold"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Alertas por email ante urgencias</li>
+                            </ul>
+                            <a href="https://wa.me/34658390284?text=Hola!%20Me%20interesa%20el%20plan%20Agente" class="w-full py-3.5 rounded-full bg-brand-secondary text-brand-primary font-bold text-center hover:brightness-110 transition-all text-[13px] shadow-[0_0_20px_rgba(34,197,94,0.4)] block">Quiero este plan →</a>
+                        </div>
+
+                        <!-- AGENTE PREMIUM -->
+                        <div class="pricing-card pricing-card-premium bg-gradient-to-br from-[#2d2460] to-[#3d3580] p-8 md:p-9 rounded-[32px] text-left animate-reveal stagger-3 flex flex-col relative shadow-xl cursor-pointer">
+                            <div class="mb-6">
+                                <div class="inline-block px-3 py-1 rounded-full bg-amber-400/10 text-[10px] font-bold uppercase tracking-widest text-amber-400 mb-4">Agente Premium</div>
+                                <h3 class="text-xl font-bold text-white mb-1">La Solución Total</h3>
+                                <p class="text-white/50 text-[12px] font-semibold mb-1">Hasta 1000 clientes/mes</p>
+                                <p class="text-white/60 text-[13px] font-medium mb-5">Todo incluido + recordatorios</p>
+                                <div class="flex items-baseline gap-2 mb-2">
+                                    <span class="price-old text-xl font-bold text-white/30">347€</span>
+                                    <span class="text-4xl font-extrabold text-white tracking-tight">197€</span>
+                                    <span class="text-white/60 text-sm font-semibold">/mes</span>
+                                </div>
+                                <div class="bg-white/10 rounded-lg px-3 py-1.5 inline-block">
+                                    <p class="text-[12px] text-white/70 font-medium">Setup único: <strong class="text-amber-400">250€</strong></p>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-amber-400 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Recordatorios WhatsApp 24h antes</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-amber-400 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Agente conversacional 24/7</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-amber-400 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Agendamiento + Modificación + Cancelación</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-amber-400 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Registro automático en Sheets</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-amber-400 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Responde preguntas frecuentes</li>
+                                <li class="flex items-center gap-3 text-[13px] text-white/80"><svg class="text-amber-400 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Alertas por email ante urgencias</li>
+                                <li class="flex items-center gap-3 text-[13px] text-amber-400 font-bold"><svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Grupo privado WhatsApp mejora continua</li>
+                            </ul>
+                            <a href="https://wa.me/34658390284?text=Hola!%20Me%20interesa%20el%20plan%20Premium" class="w-full py-3.5 rounded-full bg-amber-400 text-[#1e1b4b] font-bold text-center hover:brightness-110 transition-all text-[13px] shadow-[0_0_20px_rgba(251,191,36,0.3)] block">Quiero el Premium →</a>
+                        </div>
+
+                        <!-- ENTERPRISE -->
+                        <div class="pricing-card bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] p-8 md:p-9 rounded-[32px] text-left animate-reveal stagger-4 flex flex-col relative shadow-2xl cursor-pointer border border-amber-500/30">
+                            <div class="mb-6">
+                                <div class="inline-block px-3 py-1 rounded-full bg-amber-400/10 text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-4">Enterprise</div>
+                                <h3 class="text-xl font-bold text-white mb-1">Multi-Sede & Franquicias</h3>
+                                <p class="text-white/50 text-[13px] font-medium mb-5">La solución definitiva para múltiples ubicaciones</p>
+                                <div class="flex items-baseline gap-2 mb-2">
+                                    <span class="text-3xl font-extrabold text-white tracking-tight">A medida</span>
+                                </div>
+                                <div class="bg-white/10 rounded-lg px-3 py-1.5 inline-block">
+                                    <p class="text-[12px] text-white/70 font-medium">Setup único: <strong class="text-amber-300">Personalizado</strong></p>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-start gap-3 text-[13px] text-white/80"><svg class="text-amber-300 shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg><span>🧠 <strong class="text-white">IA de Triaje Inteligente</strong> — Detecta qué servicio, especialista o sede necesita el cliente</span></li>
+                                <li class="flex items-start gap-3 text-[13px] text-white/80"><svg class="text-amber-300 shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg><span>📅 <strong class="text-white">Multi-Agenda Dinámica</strong> — Múltiples calendarios sincronizados sin cruces</span></li>
+                                <li class="flex items-start gap-3 text-[13px] text-white/80"><svg class="text-amber-300 shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg><span>🌍 <strong class="text-white">Enrutamiento por Ubicación</strong> — Un WhatsApp centralizado que deriva a la sede más cercana</span></li>
+                                <li class="flex items-start gap-3 text-[13px] text-white/80"><svg class="text-amber-300 shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg><span>📊 <strong class="text-white">Base de Datos Centralizada</strong> — Panel de control segmentado por sede o departamento</span></li>
+                                <li class="flex items-start gap-3 text-[13px] text-amber-300 font-bold"><svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg><span>🚀 <strong>Escalabilidad Inmediata</strong> — Añade nuevos centros o profesionales sin fricciones</span></li>
+                            </ul>
+                            <a href="https://wa.me/34658390284?text=Hola!%20Me%20interesa%20el%20plan%20Enterprise" class="w-full py-3.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#1a1a2e] font-bold text-center hover:brightness-110 transition-all text-[13px] shadow-[0_0_25px_rgba(251,191,36,0.35)] block">Solicitar Presupuesto →</a>
+                        </div>
+                    </div>
+                    <div class="mt-12 animate-reveal">
+                        <div class="inline-flex items-center gap-3 bg-emerald-50 border border-emerald-100 rounded-full px-6 py-3">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            <p class="text-emerald-700 text-sm font-medium">Sin permanencias · Cancela cuando quieras · Garantía de satisfacción</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== COMPARATIVA VISUAL ==================== -->
+            <section class="py-16 md:py-24 bg-white px-6">
+                <div class="max-w-[950px] mx-auto animate-reveal">
+                    <h3 class="text-2xl md:text-4xl font-extrabold text-brand-primary tracking-tighter text-center mb-12">Tu negocio hoy <span class="text-red-500">vs</span> con Kinetic Ops</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-red-50/50 rounded-3xl p-8 md:p-10 border-2 border-red-100">
+                            <div class="text-red-500 font-bold text-sm uppercase tracking-widest mb-8 flex items-center gap-2">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                                Sin Kinetic Ops
+                            </div>
+                            <ul class="space-y-5">
+                                <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>Tu empleado se pone enfermo y <strong class="text-slate-700">nadie responde al teléfono</strong></span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>En vacaciones, <strong class="text-slate-700">tu negocio se para por completo</strong></span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>Un cliente escribe a las 23:00 y <strong class="text-slate-700">se va a la competencia</strong></span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>Citas olvidadas cada semana: <strong class="text-slate-700">€100+ perdidos</strong></span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>Dobles reservas y confusiones humanas <strong class="text-slate-700">constantes</strong></span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>Pagas un sueldo <strong class="text-slate-700">solo para gestionar WhatsApp</strong></span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>Estrés y agotamiento: <strong class="text-slate-700">llevar la agenda te quema</strong></span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-emerald-50/50 rounded-3xl p-8 md:p-10 border-2 border-emerald-200 shadow-[0_0_40px_rgba(34,197,94,0.08)]">
+                            <div class="text-brand-secondary font-bold text-sm uppercase tracking-widest mb-8 flex items-center gap-2">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Con Kinetic Ops
+                            </div>
+                            <ul class="space-y-5">
+                                <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span>La IA <strong>nunca enferma</strong>, nunca falta, nunca tiene un mal día</span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span>Trabaja <strong>365 días, 24h</strong>. Festivos y domingos incluidos</span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span>Responde <strong>en 3 segundos</strong>, de día y de noche</span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span>Recordatorios que <strong>eliminan el 85% de olvidos</strong></span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span><strong>Cero errores</strong>. Cada cita perfectamente registrada</span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span>Cuesta menos que <strong>media jornada de un empleado</strong></span></li>
+                                <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span><strong>Tranquilidad total</strong>. Tú te dedicas a lo tuyo</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== RESEÑAS (DESPUÉS DE COMPARATIVA) ==================== -->
+            <section class="py-20 md:py-28 bg-slate-50 px-6">
+                <div class="max-w-[1100px] mx-auto">
+                    <div class="text-center mb-14 animate-reveal">
+                        <p class="text-brand-secondary text-[12px] font-bold uppercase tracking-[0.2em] mb-4">Resultados reales</p>
+                        <h2 class="text-3xl md:text-5xl font-extrabold text-brand-primary tracking-tighter mb-4">Lo que dicen nuestros clientes.</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="bg-white p-8 rounded-3xl border border-slate-100 animate-reveal stagger-1 hover:shadow-lg transition-shadow">
+                            <div class="stars text-sm mb-4">★★★★★</div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">"Desde que usamos Kinetic Ops, hemos <strong class="text-brand-primary">reducido las citas perdidas un 85%</strong>. Los clientes reciben recordatorios automáticos y ya no se olvidan de venir. No entiendo cómo vivíamos sin esto."</p>
+                            <div class="flex items-center gap-3">
+                                <img src="profile-1.png" alt="Elena Marqués" class="w-11 h-11 rounded-full object-cover border-2 border-slate-100">
+                                <div><p class="text-sm font-bold text-brand-primary">Elena Marqués</p><p class="text-[11px] text-slate-400">Directora · Clínica Dermae Aesthetics</p></div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-8 rounded-3xl border border-slate-100 animate-reveal stagger-2 hover:shadow-lg transition-shadow">
+                            <div class="stars text-sm mb-4">★★★★★</div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">"La IA responde a mis pacientes a las 2 de la madrugada y les agenda cita sola. <strong class="text-brand-primary">He recuperado 2.5 horas al día</strong> que antes perdía contestando mensajes."</p>
+                            <div class="flex items-center gap-3">
+                                <img src="profile-2.png" alt="Dr. Álvaro Ramírez" class="w-11 h-11 rounded-full object-cover border-2 border-slate-100">
+                                <div><p class="text-sm font-bold text-brand-primary">Dr. Álvaro Ramírez</p><p class="text-[11px] text-slate-400">Odontólogo · Instituto Dental Alva</p></div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-8 rounded-3xl border border-slate-100 animate-reveal stagger-3 hover:shadow-lg transition-shadow">
+                            <div class="stars text-sm mb-4">★★★★★</div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">"En el primer mes <strong class="text-brand-primary">recuperé la inversión x3</strong>. Ahora la agenda se llena sola y yo me dedico a lo que mejor sé hacer: cuidar a mis clientes."</p>
+                            <div class="flex items-center gap-3">
+                                <img src="profile-3.png" alt="Marco Valenti" class="w-11 h-11 rounded-full object-cover border-2 border-slate-100">
+                                <div><p class="text-sm font-bold text-brand-primary">Marco Valenti</p><p class="text-[11px] text-slate-400">Fundador · Maison Valenti Barber Studio</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ==================== FAQ ==================== -->
+            <section class="py-20 md:py-28 bg-white px-6">
+                <div class="max-w-[800px] mx-auto">
+                    <div class="text-center mb-14 animate-reveal">
+                        <p class="text-brand-secondary text-[12px] font-bold uppercase tracking-[0.2em] mb-4">Preguntas frecuentes</p>
+                        <h2 class="text-3xl md:text-5xl font-extrabold text-brand-primary tracking-tighter mb-4">Todo lo que necesitas saber.</h2>
+                    </div>
+
+                    <div class="space-y-4 animate-reveal">
+                        <!-- FAQ 1: APIs -->
+                        <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                            <summary class="flex items-center justify-between cursor-pointer p-6 md:p-8 text-brand-primary font-bold text-[15px] hover:bg-slate-100 transition-colors">
+                                <span>¿Por qué ese precio?</span>
+                                <svg class="shrink-0 w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                            </summary>
+                            <div class="px-6 md:px-8 pb-6 md:pb-8 text-slate-600 text-sm leading-relaxed space-y-3">
+                                <p>Hemos observado clientes a los que les ofrecieron <strong class="text-brand-primary">"lo mismo" a menor precio</strong> y les acabaron <strong class="text-red-500">bloqueando el teléfono permanentemente</strong>. No pudieron volver a usar ese número nunca más, teniendo que llamar uno a uno a todos sus clientes desde un número nuevo. Un auténtico horror.</p>
+                                <p>¿El motivo? Usaban <strong>APIs "gratis" o hackeadas</strong> para abaratar costes y ganar más ellos.</p>
+                                <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-4 mt-3">
+                                    <p class="text-emerald-800 font-semibold text-sm"><span class="text-lg mr-1">🛡️</span> Nosotros usamos las <strong>APIs oficiales de Meta (WhatsApp) y OpenAI</strong>. Tú ofreces una atención ininterrumpida, eficaz y de alto valor a tus clientes, y nosotros nos hacemos cargo de todos los costes de las APIs.</p>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- FAQ 2: Personalizar -->
+                        <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                            <summary class="flex items-center justify-between cursor-pointer p-6 md:p-8 text-brand-primary font-bold text-[15px] hover:bg-slate-100 transition-colors">
+                                <span>¿La IA se adapta a mi negocio?</span>
+                                <svg class="shrink-0 w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                            </summary>
+                            <div class="px-6 md:px-8 pb-6 md:pb-8 text-slate-600 text-sm leading-relaxed">
+                                <p>Sí. <strong class="text-brand-primary">Adaptamos la IA a cada negocio de forma personalizada</strong>: tus servicios, tus productos, tus horarios, tu tono de comunicación y tus preguntas frecuentes. No es una plantilla genérica, es un asistente que conoce tu negocio como si fuera un empleado más.</p>
+                            </div>
+                        </details>
+
+                        <!-- FAQ 3: Permanencia -->
+                        <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                            <summary class="flex items-center justify-between cursor-pointer p-6 md:p-8 text-brand-primary font-bold text-[15px] hover:bg-slate-100 transition-colors">
+                                <span>¿Hay permanencia o compromiso?</span>
+                                <svg class="shrink-0 w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                            </summary>
+                            <div class="px-6 md:px-8 pb-6 md:pb-8 text-slate-600 text-sm leading-relaxed">
+                                <p>No. <strong class="text-brand-primary">Cero permanencias</strong>. Puedes cancelar cuando quieras sin penalizaciones. Estamos tan seguros de que verás resultados que no necesitamos atarte con contratos.</p>
+                            </div>
+                        </details>
+
+                        <!-- FAQ 4: Setup -->
+                        <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                            <summary class="flex items-center justify-between cursor-pointer p-6 md:p-8 text-brand-primary font-bold text-[15px] hover:bg-slate-100 transition-colors">
+                                <span>¿Qué incluye el Setup?</span>
+                                <svg class="shrink-0 w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                            </summary>
+                            <div class="px-6 md:px-8 pb-6 md:pb-8 text-slate-600 text-sm leading-relaxed">
+                                <p>El pago único de Setup cubre: <strong class="text-brand-primary">configuración completa del sistema</strong>, integración con tu calendario y herramientas, personalización de la IA con tus productos y servicios, pruebas de calidad y puesta en marcha. Todo listo en <strong>menos de 48 horas</strong>.</p>
+                            </div>
+                        </details>
+
+                        <!-- FAQ 5: Tiempo -->
+                        <details class="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+                            <summary class="flex items-center justify-between cursor-pointer p-6 md:p-8 text-brand-primary font-bold text-[15px] hover:bg-slate-100 transition-colors">
+                                <span>¿Cuánto tarda en estar funcionando?</span>
+                                <svg class="shrink-0 w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                            </summary>
+                            <div class="px-6 md:px-8 pb-6 md:pb-8 text-slate-600 text-sm leading-relaxed">
+                                <p>En <strong class="text-brand-primary">menos de 48 horas</strong> desde la contratación tu asistente está operativo. Nosotros nos encargamos de todo: tú solo tienes que decirnos cómo funciona tu negocio.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== CTA FINAL (IMPACTANTE) ==================== -->
+            <section id="contacto" class="cta-bg py-24 md:py-32 px-6">
+                <!-- Floating Particles -->
+                <div class="cta-particle cta-particle-1"></div>
+                <div class="cta-particle cta-particle-2"></div>
+                <div class="cta-particle cta-particle-3"></div>
+                <div class="cta-particle cta-particle-4"></div>
+                <div class="cta-particle cta-particle-5"></div>
+
+                <div class="max-w-[1000px] mx-auto text-center relative z-10 animate-reveal">
+                    <!-- Urgency Badge -->
+                    <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-secondary/10 border border-brand-secondary/20 text-[11px] font-bold uppercase tracking-[0.15em] text-brand-secondary mb-8">
+                        <span class="w-2 h-2 rounded-full bg-brand-secondary pulse-ai"></span>
+                        IA Disponible ahora · Respuesta en menos de 24h
+                    </div>
+
+                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tighter leading-[1.05]">
+                        ¿Listo para dejar de<br><span class="bg-gradient-to-r from-brand-secondary via-emerald-300 to-cyan-400 bg-clip-text text-transparent">perder dinero?</span>
+                    </h2>
+                    <p class="text-white/50 mb-6 max-w-xl mx-auto text-base md:text-lg leading-relaxed">
+                        Habla directamente con los fundadores. Sin intermediarios, sin esperas.
+                    </p>
+
+                    <!-- Live Counter -->
+                    <div class="flex items-center justify-center gap-2 mb-14">
+                        <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-5 py-2.5">
+                            <span class="w-2 h-2 rounded-full bg-red-500 pulse-urgency"></span>
+                            <span class="text-white/70 text-sm font-medium">Ahora mismo, <strong class="text-white" id="live-counter">3</strong> negocios están perdiendo clientes por no responder</span>
+                        </div>
+                    </div>
+
+                    <!-- Founders Section -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto mb-12">
+                        <!-- Founder 1 -->
+                        <div class="bg-white/[0.07] backdrop-blur-sm border border-white/10 rounded-3xl p-8 text-center hover:border-white/25 transition-all duration-300 group">
+                            <div class="w-28 h-28 rounded-full mx-auto mb-5 overflow-hidden border-3 border-white/20 bg-white/10 flex items-center justify-center group-hover:border-brand-secondary/50 transition-colors duration-300">
+                                <!-- Placeholder silhouette until real photo -->
+                                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.4"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-1">Tu Nombre</h3>
+                            <p class="text-white/40 text-sm mb-6">Co-Fundador · Kinetic Ops</p>
+                            <div class="space-y-3">
+                                <a href="tel:+34658390284" class="w-full py-3 rounded-full bg-gradient-to-r from-brand-secondary to-emerald-400 text-brand-primary font-bold text-[13px] flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-[0_4px_20px_rgba(34,197,94,0.3)]">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                                    Llamar Ahora
+                                </a>
+                                <a href="mailto:kineticopss@gmail.com?subject=Contacto%20Kinetic%20Ops" class="w-full py-3 rounded-full bg-white/10 text-white font-bold text-[13px] flex items-center justify-center gap-2 hover:bg-white/20 transition-all border border-white/10">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+                                    Email Personal
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Founder 2 (Socio) -->
+                        <div class="bg-white/[0.07] backdrop-blur-sm border border-white/10 rounded-3xl p-8 text-center hover:border-white/25 transition-all duration-300 group">
+                            <div class="w-28 h-28 rounded-full mx-auto mb-5 overflow-hidden border-3 border-white/20 bg-white/10 flex items-center justify-center group-hover:border-brand-secondary/50 transition-colors duration-300">
+                                <!-- Placeholder silhouette until real photo -->
+                                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" opacity="0.4"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-1">Nombre Socio</h3>
+                            <p class="text-white/40 text-sm mb-6">Co-Fundador · Kinetic Ops</p>
+                            <div class="space-y-3">
+                                <a href="tel:+34000000000" class="w-full py-3 rounded-full bg-gradient-to-r from-brand-secondary to-emerald-400 text-brand-primary font-bold text-[13px] flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-[0_4px_20px_rgba(34,197,94,0.3)]">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                                    Llamar Ahora
+                                </a>
+                                <a href="mailto:socio@gmail.com?subject=Contacto%20Kinetic%20Ops" class="w-full py-3 rounded-full bg-white/10 text-white font-bold text-[13px] flex items-center justify-center gap-2 hover:bg-white/20 transition-all border border-white/10">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+                                    Email Personal
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Email -->
+                    <div class="max-w-md mx-auto mb-12">
+                        <a href="mailto:kineticopss@gmail.com?subject=Información%20Kinetic%20Ops" class="w-full py-4 rounded-full bg-gradient-to-r from-[#EA4335] to-[#c5221f] text-white font-bold text-[14px] flex items-center justify-center gap-3 hover:brightness-110 transition-all shadow-[0_8px_30px_rgba(234,67,53,0.3)]">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+                            Contactar por Email de Empresa · kineticopss@gmail.com
+                        </a>
+                    </div>
+
+                    <!-- Trust Elements -->
+                    <div class="flex flex-wrap items-center justify-center gap-6 mb-8">
+                        <div class="flex items-center gap-2 text-white/30 text-[12px]">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            <span>Sin permanencias</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white/30 text-[12px]">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span>Setup en 48h</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white/30 text-[12px]">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                            <span>Garantía de satisfacción</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white/30 text-[12px]">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zm14 0l-5 5m0-5l5 5"/></svg>
+                            <span>Cancela cuando quieras</span>
+                        </div>
+                    </div>
+
+                    <p class="text-white/20 text-[11px]">Respondemos en menos de 24 horas laborables. Tu negocio nos importa.</p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ==================== FOOTER ==================== -->
+        <footer class="bg-brand-primary text-white/40 py-14">
+            <div class="max-w-[1000px] mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div class="text-center md:text-left flex items-center gap-4">
+                        <div class="bg-white/5 rounded-xl p-2">
+                            <img src="logo-kinetic.png" alt="Kinetic Ops" class="h-10 w-auto">
+                        </div>
+                        <div>
+                            <div class="text-lg font-extrabold text-white tracking-tighter mb-1">Kinetic <span class="text-[#5b7fbf]">Ops</span></div>
+                            <p class="text-sm">Acelera tu rentabilidad con IA.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-8 text-[11px] font-semibold uppercase tracking-widest">
+                        <a href="#" class="hover:text-white transition-colors">Privacidad</a>
+                        <a href="#" class="hover:text-white transition-colors">Términos</a>
+                        <a href="mailto:kineticopss@gmail.com" class="hover:text-white transition-colors">Contacto</a>
+                    </div>
+                </div>
+                <div class="mt-10 text-center text-[11px] text-white/20">© 2025 Kinetic Ops. Todos los derechos reservados.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+
+    <!-- Marquee (ambas filas siempre visibles, direcciones opuestas) -->
+    <script>
+        const row1 = ['🦷 Dentistas','💇 Peluquerías','💅 Centros de Estética','🌸 Salón de Belleza','🧠 Psicólogos','🩺 Dermatólogos','👓 Ópticas','💆 Fisioterapeutas','🧖 Masajistas','🐕 Peluquería Canina','🐾 Veterinarios','🏠 Inmobiliarias','💅 Estudio de Uñas'];
+        const row2 = ['👂 Centros Auditivos','🤲 Quiromasajistas','🏥 Rehabilitación','🦶 Podólogos','🥗 Nutricionistas','🍎 Dietistas','🦴 Quiroprácticos','📊 Gestorías','⚖️ Abogados','🏋️ Entrenadores Personales','🧘 Pilates','🕉️ Yoga','🚗 Limpieza de Coches'];
+
+        function fillMarquee(items, containerId) {
+            const container = document.getElementById(containerId);
+            const allItems = [...items, ...items];
+            container.innerHTML = allItems.map(item =>
+                `<span class="text-[14px] font-medium text-slate-500 whitespace-nowrap px-4 hover:text-brand-primary transition-colors cursor-default">${item}</span>`
+            ).join('<span class="text-slate-200 mx-1">·</span>');
+        }
+        fillMarquee(row1, 'marquee-row-1');
+        fillMarquee(row2, 'marquee-row-2');
+    </script>
+
+    <!-- Chat Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatContainer = document.getElementById('chat-container');
+            const slots = { 11: document.getElementById('slot-11'), 16: document.getElementById('slot-16') };
+
+            const messages = [
+                { sender: 'user', text: 'Hola, ¿tienes hueco para mañana?' },
+                { sender: 'ai', text: '¡Hola! 👋 Sí, tengo disponibilidad a las 11:00 y a las 16:00. ¿Cuál te viene mejor?' },
+                { sender: 'user', text: 'Mejor a las 11:00, por favor.' },
+                { sender: 'ai', text: '✅ Perfecto. Cita confirmada para mañana a las 11:00. Te enviaré un recordatorio 24h antes. ¡Nos vemos! 🚀', action: 11 },
+                { sender: 'user', text: '¿Puedo cambiarla a las 16:00?' },
+                { sender: 'ai', text: '🔄 Hecho. Tu cita ha sido modificada a las 16:00. Actualizado en tu calendario. ¡Hasta mañana!', action: 16, undo: 11 }
+            ];
+            let currentMsg = 0;
+
+            function addMessage(msg) {
+                const div = document.createElement('div');
+                div.className = `max-w-[80%] p-3.5 rounded-2xl text-[13px] font-medium transition-all duration-500 opacity-0 translate-y-2 ${
+                    msg.sender === 'user' ? 'bg-slate-100 text-slate-600 mr-auto rounded-bl-none' : 'bg-brand-primary text-white ml-auto rounded-br-none shadow-lg'
+                }`;
+                div.innerText = msg.text;
+                chatContainer.appendChild(div);
+                requestAnimationFrame(() => { requestAnimationFrame(() => {
+                    div.classList.remove('opacity-0', 'translate-y-2');
+                    chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
+                }); });
+                if (msg.action) setTimeout(() => {
+                    const s = slots[msg.action];
+                    s.classList.add('bg-emerald-50', 'border-emerald-200', 'scale-105');
+                    s.querySelector('span:last-child').innerText = '✓ Agendado';
+                    s.querySelector('span:last-child').classList.replace('text-slate-300', 'text-brand-secondary');
+                }, 600);
+                if (msg.undo) setTimeout(() => {
+                    const s = slots[msg.undo];
+                    s.classList.remove('bg-emerald-50', 'border-emerald-200', 'scale-105');
+                    s.querySelector('span:last-child').innerText = 'Disponible';
+                    s.querySelector('span:last-child').classList.replace('text-brand-secondary', 'text-slate-300');
+                }, 600);
+            }
+
+            function runDemo() {
+                if (currentMsg < messages.length) { addMessage(messages[currentMsg]); currentMsg++; setTimeout(runDemo, 2800); }
+                else setTimeout(() => {
+                    chatContainer.innerHTML = ''; currentMsg = 0;
+                    Object.values(slots).forEach(s => {
+                        s.classList.remove('bg-emerald-50', 'border-emerald-200', 'scale-105');
+                        s.querySelector('span:last-child').innerText = 'Disponible';
+                        s.querySelector('span:last-child').classList.replace('text-brand-secondary', 'text-slate-300');
+                    });
+                    runDemo();
+                }, 5000);
+            }
+
+            const obs = new IntersectionObserver(e => { if (e[0].isIntersecting) { runDemo(); obs.disconnect(); } }, { threshold: 0.3 });
+            obs.observe(document.getElementById('demo'));
+        });
+    </script>
+
+    <!-- Reveal & Nav -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('animate-reveal-visible'); observer.unobserve(e.target); } });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
+
+            const nav = document.getElementById('main-nav');
+            window.addEventListener('scroll', () => {
+                nav.classList.toggle('nav-scrolled', window.scrollY > 80);
+            }, { passive: true });
+        });
+    </script>
+
+    <!-- Live Counter Animation -->
+    <script>
+        (() => {
+            const counter = document.getElementById('live-counter');
+            if (!counter) return;
+            const nums = [3, 5, 2, 7, 4, 6, 8, 3, 5, 9];
+            let idx = 0;
+            setInterval(() => {
+                idx = (idx + 1) % nums.length;
+                counter.style.transition = 'all 0.4s ease';
+                counter.style.opacity = '0';
+                counter.style.transform = 'translateY(-6px)';
+                setTimeout(() => {
+                    counter.textContent = nums[idx];
+                    counter.style.opacity = '1';
+                    counter.style.transform = 'translateY(0)';
+                }, 400);
+            }, 4000);
+        })();
+    </script>
+</body>
+</html>
