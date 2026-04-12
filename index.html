@@ -168,13 +168,20 @@
                             <source src="VIDEO FINAL LANDING.mp4" type="video/mp4">
                         </video>
                         <!-- Poster overlay -->
-                        <div id="video-poster" class="absolute inset-0 flex flex-col items-end md:items-center justify-end md:justify-center cursor-pointer pb-6 md:pb-0" style="background-image: url('Thumbnail del vídeo .jpg'); background-size: cover; background-position: center;" onclick="document.getElementById('hero-video').play(); this.style.display='none';">
-                            <div class="absolute inset-0 bg-black/30"></div>
-                            <div class="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/20 border-2 border-white/50 flex items-center justify-center md:mb-5 mr-4 md:mr-0 hover:scale-110 hover:bg-white/35 transition-all duration-300 shadow-lg backdrop-blur-sm">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"></path></svg>
+                        <div id="video-poster" class="absolute inset-0 cursor-pointer" style="background-image: url('Thumbnail del vídeo .jpg'); background-size: cover; background-position: center;" onclick="document.getElementById('hero-video').play(); this.style.display='none';">
+                            <!-- Overlay oscuro suave -->
+                            <div class="absolute inset-0 bg-black/25"></div>
+                            <!-- Gradiente inferior para el botón -->
+                            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <!-- Botón play: siempre en esquina inferior derecha -->
+                            <div class="absolute bottom-4 right-4 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 flex items-center justify-center hover:scale-110 hover:bg-white transition-all duration-300 shadow-xl">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#1A1F2C"><path d="M8 5v14l11-7z"></path></svg>
                             </div>
-                            <h3 class="hidden md:block relative text-white text-lg md:text-2xl font-extrabold tracking-tight text-center px-6 drop-shadow-lg">Mira cómo trabaja tu recepcionista IA</h3>
-                            <p class="hidden md:block relative text-white/70 text-sm mt-2 tracking-widest uppercase drop-shadow">Reproducir demo</p>
+                            <!-- Texto solo en desktop, abajo a la izquierda -->
+                            <div class="hidden md:block absolute bottom-5 left-6">
+                                <p class="text-white font-bold text-base drop-shadow-lg">Mira cómo trabaja tu recepcionista IA</p>
+                                <p class="text-white/60 text-xs mt-0.5 tracking-widest uppercase">Reproducir demo</p>
+                            </div>
                         </div>
                     </div>
                 </div>
