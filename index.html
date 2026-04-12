@@ -81,9 +81,9 @@
 </head>
 <body class="font-sans bg-white text-brand-primary overflow-x-hidden selection:bg-brand-secondary selection:text-brand-primary">
     <!-- ==================== BARRA OFERTA LIMITADA ==================== -->
-    <div class="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-red-600 via-red-500 to-orange-500 text-white text-center py-1.5 px-4">
-        <p class="text-[11px] md:text-[12px] font-bold tracking-wide leading-tight">OFERTA LIMITADA · Solo quedan <strong class="underline">5 plazas</strong> este mes</p>
-        <p class="text-[10px] md:text-[11px] font-medium tracking-wide opacity-90">El precio sube el 1 de mayo</p>
+    <div class="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-red-600 via-red-500 to-orange-500 text-white text-center py-2 px-4" style="height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <p class="text-[12px] font-extrabold tracking-widest uppercase leading-tight">OFERTA LIMITADA &nbsp;·&nbsp; Solo quedan <strong class="underline decoration-white/60">5 plazas</strong> este mes.</p>
+        <p class="text-[10px] font-medium tracking-wide opacity-80 mt-0.5">El precio sube el 1 de mayo.</p>
     </div>
 
     <div class="min-h-screen flex flex-col">
@@ -112,7 +112,7 @@
         </nav>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden fixed top-[80px] left-4 right-4 z-40 bg-white/95 backdrop-blur-xl border border-slate-200/50 rounded-3xl shadow-xl p-6">
+        <div id="mobile-menu" class="hidden fixed top-[122px] left-4 right-4 z-40 bg-white/95 backdrop-blur-xl border border-slate-200/50 rounded-3xl shadow-xl p-6">
             <div class="flex flex-col gap-4 text-[13px] font-semibold uppercase tracking-[0.15em] text-slate-500">
                 <a href="#problema" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-brand-primary transition-colors py-2 border-b border-slate-100">Pérdidas</a>
                 <a href="#demo" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-brand-primary transition-colors py-2 border-b border-slate-100">Sistema</a>
@@ -131,14 +131,13 @@
                 <div class="hero-orb hero-orb-2"></div>
                 <div class="max-w-[900px] mx-auto relative z-10">
 
-                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-brand-primary tracking-tighter leading-[1.05] mb-8 animate-reveal stagger-1">
-                        Tu negocio no duerme.<br>Tu WhatsApp,<br><span class="text-gradient-green">ahora tampoco.</span>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-brand-primary tracking-tighter leading-[1.1] mb-8 animate-reveal stagger-1">
+                        Tu negocio no duerme.<br>Tu WhatsApp, <span class="text-gradient-green">ahora tampoco.</span>
                     </h1>
-                    <p class="text-base md:text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed animate-reveal stagger-2">
-                        Implementa un recepcionista con IA<br class="hidden sm:block">
+                    <p class="text-base md:text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-loose animate-reveal stagger-2">
+                        Implementa un recepcionista con IA<br>
                         que agenda, gestiona y optimiza tu tiempo las 24/7.<br>
-                        Deja de perder ingresos<br class="hidden sm:block">
-                        por mensajes no leídos.
+                        Deja de perder ingresos por mensajes no leídos.
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-reveal stagger-3">
                         <a href="#demo-video" class="bg-brand-primary text-white px-7 py-3.5 rounded-full font-bold shadow-lg hover:bg-slate-800 transition-all flex items-center gap-3 text-[14px]">
@@ -259,8 +258,8 @@
                                 <span class="text-[11px] font-bold uppercase tracking-widest text-red-300">Abandono</span>
                             </div>
                             <div class="text-red-500 font-extrabold text-6xl mb-3 tracking-tighter stat-number">78%</div>
-                            <h3 class="text-lg font-bold text-brand-primary mb-2">Clientes que no vuelven</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed">Si no respondes en <strong class="text-slate-600">5 minutos</strong>, se van a tu competencia y <strong class="text-red-400">nunca regresan</strong>.</p>
+                            <h3 class="text-lg font-bold text-brand-primary mb-2">Clientes que no vuelven.</h3>
+                            <p class="text-slate-400 text-sm leading-loose">Si no respondes en <strong class="text-slate-600">5 minutos,</strong><br>se van a tu competencia<br>y <strong class="text-red-400">nunca regresan.</strong></p>
                         </div>
                         <div class="counter-card bg-gradient-to-br from-amber-50 to-white rounded-3xl p-8 border border-amber-100 animate-reveal stagger-2 transition-all duration-500 hover:shadow-xl cursor-default">
                             <div class="flex items-center gap-3 mb-6">
@@ -270,8 +269,8 @@
                                 <span class="text-[11px] font-bold uppercase tracking-widest text-amber-300">Pérdidas</span>
                             </div>
                             <div class="text-amber-500 font-extrabold text-6xl mb-3 tracking-tighter stat-number">€4.8k</div>
-                            <h3 class="text-lg font-bold text-brand-primary mb-2">Euros que tiras a la basura</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed">Cada mes sin automatizar. <strong class="text-slate-600">Citas olvidadas + clientes perdidos</strong> = dinero que nunca recuperas.</p>
+                            <h3 class="text-lg font-bold text-brand-primary mb-2">Euros que tiras a la basura.</h3>
+                            <p class="text-slate-400 text-sm leading-loose">Cada mes sin automatizar.<br><strong class="text-slate-600">Citas olvidadas + clientes perdidos</strong><br>= dinero que nunca recuperas.</p>
                         </div>
                         <div class="counter-card bg-gradient-to-br from-blue-50 to-white rounded-3xl p-8 border border-blue-100 animate-reveal stagger-3 transition-all duration-500 hover:shadow-xl cursor-default">
                             <div class="flex items-center gap-3 mb-6">
@@ -281,14 +280,14 @@
                                 <span class="text-[11px] font-bold uppercase tracking-widest text-blue-300">Tiempo</span>
                             </div>
                             <div class="text-blue-500 font-extrabold text-6xl mb-3 tracking-tighter stat-number">3.5h</div>
-                            <h3 class="text-lg font-bold text-brand-primary mb-2">Horas desperdiciadas al día</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed">Respondiendo mensajes y confirmando citas. <strong class="text-slate-600">Tiempo que podrías facturar.</strong></p>
+                            <h3 class="text-lg font-bold text-brand-primary mb-2">Horas desperdiciadas al día.</h3>
+                            <p class="text-slate-400 text-sm leading-loose">Respondiendo mensajes<br>y confirmando citas.<br><strong class="text-slate-600">Tiempo que podrías facturar.</strong></p>
                         </div>
                     </div>
                     <div class="mt-10 text-center animate-reveal stagger-4">
                         <div class="inline-flex items-center gap-3 bg-red-50 border border-red-100 rounded-full px-6 py-3">
                             <span class="text-lg">💸</span>
-                            <p class="text-red-600 text-sm font-medium"><strong>¿Cuánto dinero has perdido ya hoy?</strong> Cada hora sin automatizar = oportunidades perdidas.</p>
+                            <p class="text-red-600 text-sm font-medium"><strong>¿Cuánto dinero has perdido ya hoy?</strong><br>Cada hora sin automatizar<br>= oportunidades perdidas.</p>
                         </div>
                     </div>
                 </div>
@@ -300,7 +299,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-start">
                         <div class="lg:col-span-4 animate-reveal lg:sticky lg:top-32">
                             <h2 class="text-3xl md:text-4xl font-extrabold text-brand-primary tracking-tighter mb-6">Sincronización Inteligente.</h2>
-                            <p class="text-base text-slate-500 mb-6 leading-relaxed">Nuestro sistema no solo responde; <strong class="text-brand-primary">gestiona</strong>. Entiende el contexto, revisa tu disponibilidad y ajusta tu agenda en tiempo real.</p>
+                            <p class="text-base text-slate-500 mb-6 leading-loose">Nuestro sistema no solo responde: <strong class="text-brand-primary">gestiona.</strong><br>Entiende el contexto,<br>revisa tu disponibilidad<br>y ajusta tu agenda en tiempo real.</p>
                             <div class="space-y-3 mb-8">
                                 <div class="flex items-start gap-3 p-3 bg-white rounded-xl border border-slate-200">
                                     <div class="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 mt-0.5">
@@ -360,7 +359,7 @@
             <section id="sectores" class="py-16 md:py-20 bg-[#F9F9F9] overflow-hidden">
                 <div class="max-w-[1000px] mx-auto px-6 text-center mb-10 animate-reveal">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-brand-primary tracking-tighter mb-4">Funciona para tu negocio.</h2>
-                    <p class="text-slate-400 text-base">Más de <strong class="text-brand-primary">26 sectores</strong> diferentes ya confían en Kinetic Ops.</p>
+                    <p class="text-slate-400 text-base">Más de <strong class="text-brand-primary">26 sectores</strong> diferentes<br>ya confían en Kinetic Ops.</p>
                 </div>
                 <!-- Row 1: Left to Right -->
                 <div class="overflow-hidden mb-3">
@@ -379,8 +378,9 @@
                         <h2 class="text-3xl md:text-5xl font-extrabold text-brand-primary tracking-tighter mb-4">Elige tu plan.</h2>
                         <p class="text-slate-500 max-w-xl mx-auto">Invierte menos de lo que pierdes<br>en un solo cliente que no viene.</p>
                         <!-- Urgencia de plazas -->
-                        <div class="mt-6 inline-flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-2xl px-5 py-3 shadow-sm">
-                            <div class="flex gap-1">
+                        <div class="mt-6 inline-block bg-amber-50 border border-amber-200 rounded-2xl px-6 py-4 shadow-sm text-center">
+                            <p class="text-[13px] font-extrabold text-slate-700 mb-3">Solo <span class="text-red-500">5 plazas</span> disponibles este mes.</p>
+                            <div class="flex justify-center gap-1.5 mb-3">
                                 <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
                                 <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
                                 <span class="w-3 h-3 rounded-full bg-brand-secondary"></span>
@@ -394,7 +394,7 @@
                                 <span class="w-3 h-3 rounded-full bg-slate-200"></span>
                                 <span class="w-3 h-3 rounded-full bg-slate-200"></span>
                             </div>
-                            <p class="text-[13px] font-bold text-slate-700">Solo <span class="text-red-500">5 plazas</span> disponibles este mes · <span class="text-slate-400 font-medium">7 ya ocupadas</span></p>
+                            <p class="text-[11px] font-medium text-slate-400">7 ya ocupadas.</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[860px] mx-auto mt-14">
@@ -405,7 +405,7 @@
                             <div class="mb-8 pt-8 md:pt-0">
                                 <div class="inline-block px-3 py-1 rounded-full bg-brand-secondary/10 text-[10px] font-bold uppercase tracking-widest text-brand-secondary mb-4">Agente</div>
                                 <h3 class="text-2xl font-bold text-white mb-1">Automatización Completa</h3>
-                                <p class="text-white/60 text-[14px] font-medium mb-6">La agenda que trabaja por ti 24/7</p>
+                                <p class="text-white/60 text-[14px] font-medium mb-6">La agenda que trabaja por ti,<br>las 24 horas, los 7 días.</p>
                                 <div class="flex items-baseline gap-2 mb-3">
                                     <span class="price-old text-xl font-bold text-white/30">197€</span>
                                     <span class="text-5xl md:text-6xl font-extrabold text-white tracking-tight">90€</span>
@@ -432,8 +432,8 @@
                             <div class="mb-8">
                                 <div class="inline-block px-3 py-1 rounded-full bg-amber-400/10 text-[10px] font-bold uppercase tracking-widest text-amber-300 mb-4">Enterprise</div>
                                 <h3 class="text-2xl font-bold text-white mb-2">Pago Único</h3>
-                                <p class="text-amber-300/70 text-[12px] font-semibold mb-6">Consulta sin compromiso · Precio a medida</p>
-                                <p class="text-white/70 text-[14px] leading-relaxed mb-6">Elige instalar solo el sistema de <strong class="text-white">recordatorios</strong> o el <strong class="text-white">pack completo</strong> directamente en la infraestructura de tu negocio. Incluye:</p>
+                                <p class="text-amber-300/70 text-[12px] font-semibold mb-6">Consulta sin compromiso.</p>
+                                <p class="text-white/70 text-[14px] leading-loose mb-6">Instalación directa<br>en la infraestructura de tu negocio.<br>Incluye:</p>
                                 <ul class="space-y-4 mb-6">
                                     <li class="flex items-center gap-3 text-[14px] text-white/80"><svg class="text-amber-400 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Instalación en tu Empresa</li>
                                     <li class="flex items-center gap-3 text-[14px] text-white/80"><svg class="text-amber-400 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Guía paso a paso</li>
@@ -459,9 +459,6 @@
                     <h3 class="text-2xl md:text-4xl font-extrabold text-brand-primary tracking-tighter text-center mb-12">Tu negocio hoy <span class="text-red-500">vs</span> con Kinetic Ops</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-red-50/50 rounded-3xl p-8 md:p-10 border-2 border-red-100">
-                            <div class="text-red-500 font-bold text-sm uppercase tracking-widest mb-8 flex items-center gap-2">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                            </div>
                             <ul class="space-y-5">
                                 <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>Tu empleado se pone enfermo y <strong class="text-slate-700">nadie responde al teléfono</strong></span></li>
                                 <li class="flex items-start gap-3 text-[14px] text-slate-500"><span class="text-red-400 mt-0.5 shrink-0">✗</span> <span>En vacaciones, <strong class="text-slate-700">tu negocio se para por completo</strong></span></li>
@@ -473,9 +470,6 @@
                             </ul>
                         </div>
                         <div class="bg-emerald-50/50 rounded-3xl p-8 md:p-10 border-2 border-emerald-200 shadow-[0_0_40px_rgba(34,197,94,0.08)]">
-                            <div class="text-brand-secondary font-bold text-sm uppercase tracking-widest mb-8 flex items-center gap-2">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            </div>
                             <ul class="space-y-5">
                                 <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span>La IA <strong>nunca enferma</strong>, nunca falta, nunca tiene un mal día</span></li>
                                 <li class="flex items-start gap-3 text-[14px] text-slate-700 font-medium"><span class="text-brand-secondary mt-0.5 shrink-0">✓</span> <span>Trabaja <strong>365 días, 24h</strong>. Festivos y domingos incluidos</span></li>
@@ -494,8 +488,7 @@
             <section class="py-20 md:py-28 bg-[#F4F6FF] px-6">
                 <div class="max-w-[1100px] mx-auto">
                     <div class="text-center mb-14 animate-reveal">
-                        <p class="text-brand-secondary text-[12px] font-bold uppercase tracking-[0.2em] mb-4">Resultados reales</p>
-                        <h2 class="text-3xl md:text-5xl font-extrabold text-brand-primary tracking-tighter mb-4">Lo que dicen nuestros clientes.</h2>
+                        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tighter mb-4"><span class="text-gradient-green">Lo que dicen</span><br>nuestros clientes.</h2>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div class="bg-white p-8 rounded-3xl border border-slate-100 animate-reveal stagger-1 hover:shadow-lg transition-shadow">
@@ -531,8 +524,7 @@
             <section class="py-20 md:py-28 bg-[#F9F9F9] px-6">
                 <div class="max-w-[800px] mx-auto">
                     <div class="text-center mb-14 animate-reveal">
-                        <p class="text-brand-secondary text-[12px] font-bold uppercase tracking-[0.2em] mb-4">Preguntas frecuentes</p>
-                        <h2 class="text-3xl md:text-5xl font-extrabold text-brand-primary tracking-tighter mb-4">Todo lo que necesitas saber.</h2>
+                        <h2 class="text-3xl md:text-5xl font-extrabold tracking-tighter mb-4"><span class="text-gradient-green">Todo lo que</span><br>necesitas saber.</h2>
                     </div>
 
                     <div class="space-y-4 animate-reveal">
@@ -609,23 +601,23 @@
 
                 <div class="max-w-[1000px] mx-auto text-center relative z-10 animate-reveal">
                     <!-- Urgency Badge -->
-                    <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-secondary/10 border border-brand-secondary/20 text-[11px] font-bold uppercase tracking-[0.15em] text-brand-secondary mb-8">
-                        <span class="w-2 h-2 rounded-full bg-brand-secondary pulse-ai"></span>
-                        IA Disponible ahora · Respuesta en menos de 24h
+                    <div class="inline-flex flex-col items-center gap-1 px-5 py-2.5 rounded-full bg-brand-secondary/10 border border-brand-secondary/20 mb-8">
+                        <span class="text-[12px] font-extrabold uppercase tracking-[0.15em] text-gradient-green">Disponible ahora.</span>
+                        <span class="text-[11px] font-medium uppercase tracking-widest text-white/50">Respuesta en menos de 24 horas.</span>
                     </div>
 
-                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tighter leading-[1.05]">
-                        ¿Listo para dejar de<br><span class="bg-gradient-to-r from-brand-secondary via-emerald-300 to-cyan-400 bg-clip-text text-transparent">perder dinero?</span>
+                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tighter leading-[1.1]">
+                        ¿Listo para dejar de<br><span class="text-gradient-green">perder dinero?</span>
                     </h2>
-                    <p class="text-white/50 mb-6 max-w-xl mx-auto text-base md:text-lg leading-relaxed">
-                        Habla directamente con los fundadores. Sin intermediarios, sin esperas.
+                    <p class="text-white/50 mb-6 max-w-xl mx-auto text-base md:text-lg leading-loose">
+                        Habla directamente con los fundadores.<br>Sin intermediarios, sin esperas.
                     </p>
 
                     <!-- Live Counter -->
                     <div class="flex items-center justify-center gap-2 mb-14 px-2">
                         <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-2xl px-5 py-2.5 text-center">
                             <span class="w-2 h-2 rounded-full bg-red-500 pulse-urgency shrink-0"></span>
-                            <span class="text-white/70 text-sm font-medium">Ahora mismo, <strong class="text-white" id="live-counter">3</strong> negocios están perdiendo clientes por no responder</span>
+                            <span class="text-white/70 text-sm font-medium">Ahora mismo, <strong class="text-white" id="live-counter">847</strong> negocios<br>están perdiendo clientes por no responder.</span>
                         </div>
                     </div>
 
