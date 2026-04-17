@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+
+Sitemap: https://citazero.com/sitemap.xml
