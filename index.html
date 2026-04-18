@@ -220,6 +220,25 @@
           animation: bgShift 20s ease-in-out infinite reverse;
         }
 
+        /* === Spectacular Video Background === */
+        @keyframes auroraFlash {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .bg-video-spectacular {
+          background: linear-gradient(-45deg, #0A0E1A, #1a202c, #064E3B, #0F172A);
+          background-size: 400% 400%;
+          animation: auroraFlash 15s ease infinite;
+          position: relative;
+        }
+        .bg-video-spectacular::before {
+          content: ''; position: absolute; inset: 0; pointer-events: none;
+          background-image:
+            radial-gradient(ellipse 800px 800px at 20% 20%, rgba(59,130,246,0.2) 0%, transparent 60%),
+            radial-gradient(ellipse 800px 800px at 80% 80%, rgba(16,185,129,0.25) 0%, transparent 60%);
+        }
+
         /* === iPhone X Mockup === */
         .iphone-x {
           position: relative;
@@ -428,7 +447,7 @@
         <nav class="fixed top-[36px] left-0 right-0 z-50 px-3 md:px-6 py-2 md:py-3 transition-all duration-500" id="main-nav">
             <div class="nav-inner max-w-[1200px] mx-auto flex items-center justify-between bg-white/85 backdrop-blur-xl border border-line px-4 md:px-8 py-2.5 md:py-3.5 rounded-full shadow-sm transition-all duration-500">
                 <a href="#" class="flex items-center hover:scale-[1.03] transition-transform">
-                    <img src="logo-citazero.png?v=2" alt="CitaZero Logo" class="h-7 md:h-9 w-auto object-contain bg-white/50 backdrop-blur-sm rounded-xl px-2 py-1 shadow-sm border border-line" onerror="this.src='';this.alt='Fallo al cargar logo'">
+                    <img src="logo-citazero.png?v=3" alt="CitaZero Logo" class="h-10 md:h-12 w-auto object-contain drop-shadow-sm filter contrast-125" onerror="this.src='';this.alt='Fallo al cargar logo'">
                     <span class="sr-only">CitaZero</span>
                 </a>
                 <div class="hidden md:flex items-center gap-10 text-[12px] font-semibold uppercase tracking-[0.15em] text-ink-400">
@@ -929,11 +948,11 @@
             </section>
 
             <!-- ==================== 7. VÍDEO ==================== -->
-            <section class="py-14 md:py-28 bg-surface-base px-4 md:px-6">
-                <div class="max-w-[900px] mx-auto">
+            <section class="py-14 md:py-28 bg-video-spectacular px-4 md:px-6 relative overflow-hidden">
+                <div class="max-w-[900px] mx-auto relative z-10">
                     <div class="text-center mb-8 md:mb-12 animate-reveal">
-                        <h2 class="text-2xl md:text-5xl font-extrabold text-ink-900 tracking-tighter mb-3 md:mb-4">Vea CitaZero funcionando<br><span class="text-gradient-green">en un caso real.</span></h2>
-                        <p class="text-ink-500 text-sm md:text-lg">Menos de 2 minutos para entender cómo transforma su agenda.</p>
+                        <h2 class="text-2xl md:text-5xl font-extrabold text-white tracking-tighter mb-3 md:mb-4">Vea CitaZero funcionando<br><span class="text-brand-greenLight">en un caso real.</span></h2>
+                        <p class="text-white/80 text-sm md:text-lg">Menos de 2 minutos para entender cómo transforma su agenda.</p>
                     </div>
                     <div class="animate-reveal stagger-2 relative">
                         <div class="relative aspect-video bg-ink-900 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-line">
@@ -1089,7 +1108,7 @@
             <div class="max-w-[1000px] mx-auto px-4 md:px-6">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
                     <div class="text-center md:text-left flex flex-col md:flex-row items-center gap-4">
-                        <img src="logo-citazero.png?v=2" alt="CitaZero Logo" class="h-10 md:h-12 w-auto object-contain bg-white/50 backdrop-blur-sm rounded-2xl px-3 py-1.5 shadow-sm border border-line" onerror="this.src='';this.alt='Fallo al cargar logo'">
+                        <img src="logo-citazero.png?v=3" alt="CitaZero Logo" class="h-12 md:h-16 w-auto object-contain drop-shadow-sm filter contrast-125" onerror="this.src='';this.alt='Fallo al cargar logo'">
                         <p class="text-[11px] md:text-xs text-ink-400 font-medium">Agendamiento automático con IA.</p>
                     </div>
                     <div class="flex gap-6 md:gap-8 text-[10px] md:text-[11px] font-semibold uppercase tracking-widest text-ink-400">
