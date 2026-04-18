@@ -145,12 +145,23 @@
         [id] { scroll-margin-top: 100px; }
 
         /* === BACKGROUNDS === */
+        @keyframes bgShift {
+          0% { background-position: 0% 0%; }
+          50% { background-position: 100% 100%; }
+          100% { background-position: 0% 0%; }
+        }
+        @keyframes floatElement {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(1deg); }
+        }
+        .floating-mockup {
+          animation: floatElement 6s ease-in-out infinite;
+        }
+        
         .bg-aurora-hero {
-          background:
-            radial-gradient(ellipse 1000px 600px at 15% 10%, rgba(16,185,129,0.12) 0%, transparent 50%),
-            radial-gradient(ellipse 800px 500px at 85% 20%, rgba(59,130,246,0.10) 0%, transparent 50%),
-            radial-gradient(ellipse 600px 400px at 50% 90%, rgba(168,85,247,0.06) 0%, transparent 50%),
-            #FFFFFF;
+          background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 30%, #eff6ff 70%, #ffffff 100%);
+          background-size: 200% 200%;
+          animation: bgShift 15s ease-in-out infinite;
           position: relative;
         }
         .bg-aurora-hero::before {
@@ -158,11 +169,11 @@
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(10,14,26,0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(10,14,26,0.025) 1px, transparent 1px);
-          background-size: 44px 44px;
-          mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-          -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            radial-gradient(ellipse 800px 600px at 15% 10%, rgba(16,185,129,0.08) 0%, transparent 60%),
+            radial-gradient(ellipse 600px 400px at 85% 20%, rgba(59,130,246,0.06) 0%, transparent 60%),
+            linear-gradient(rgba(10,14,26,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(10,14,26,0.02) 1px, transparent 1px);
+          background-size: auto, auto, 40px 40px, 40px 40px;
           pointer-events: none;
         }
         .bg-demo {
@@ -422,7 +433,7 @@
         <nav class="fixed top-[36px] left-0 right-0 z-50 px-3 md:px-6 py-2 md:py-3 transition-all duration-500" id="main-nav">
             <div class="nav-inner max-w-[1200px] mx-auto flex items-center justify-between bg-white/85 backdrop-blur-xl border border-line px-4 md:px-8 py-2.5 md:py-3.5 rounded-full shadow-sm transition-all duration-500">
                 <a href="#" class="flex items-center hover:scale-[1.03] transition-transform">
-                    <img src="logo-citazero.png" alt="CitaZero Logo" class="h-6 md:h-8 w-auto object-contain">
+                    <img src="logo-citazero.png?v=2" alt="CitaZero Logo" class="h-7 md:h-9 w-auto object-contain bg-white/50 backdrop-blur-sm rounded-xl px-2 py-1 shadow-sm border border-line" onerror="this.src='';this.alt='Fallo al cargar logo'">
                     <span class="sr-only">CitaZero</span>
                 </a>
                 <div class="hidden md:flex items-center gap-10 text-[12px] font-semibold uppercase tracking-[0.15em] text-ink-400">
@@ -494,9 +505,9 @@
                         </div>
                     </div>
                     <!-- Right column — Hero Mockup (desktop only) -->
-                    <div class="hidden lg:block flex-shrink-0 relative w-[380px]">
+                    <div class="hidden lg:block flex-shrink-0 relative w-[380px] floating-mockup">
                       <!-- iPhone X — sits BEHIND the floating cards via z-index -->
-                      <div class="iphone-x relative mx-auto w-[280px] aspect-[9/19.5] z-10">
+                      <div class="iphone-x relative mx-auto w-[280px] aspect-[9/19.5] z-10 hover:scale-[1.02] transition-transform duration-500">
                         <div class="iphone-x-screen">
                           <div class="iphone-x-notch"></div>
                           <div class="iphone-x-status">
@@ -1083,7 +1094,7 @@
             <div class="max-w-[1000px] mx-auto px-4 md:px-6">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
                     <div class="text-center md:text-left flex flex-col md:flex-row items-center gap-4">
-                        <img src="logo-citazero.png" alt="CitaZero Logo" class="h-8 md:h-10 w-auto object-contain">
+                        <img src="logo-citazero.png?v=2" alt="CitaZero Logo" class="h-10 md:h-12 w-auto object-contain bg-white/50 backdrop-blur-sm rounded-2xl px-3 py-1.5 shadow-sm border border-line" onerror="this.src='';this.alt='Fallo al cargar logo'">
                         <p class="text-[11px] md:text-xs text-ink-400 font-medium">Agendamiento automático con IA.</p>
                     </div>
                     <div class="flex gap-6 md:gap-8 text-[10px] md:text-[11px] font-semibold uppercase tracking-widest text-ink-400">
