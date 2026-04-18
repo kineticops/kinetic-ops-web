@@ -170,59 +170,54 @@
           inset: 0;
           background-image:
             radial-gradient(ellipse 800px 600px at 15% 10%, rgba(16,185,129,0.08) 0%, transparent 60%),
-            radial-gradient(ellipse 600px 400px at 85% 20%, rgba(59,130,246,0.06) 0%, transparent 60%),
-            linear-gradient(rgba(10,14,26,0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(10,14,26,0.02) 1px, transparent 1px);
-          background-size: auto, auto, 40px 40px, 40px 40px;
+            radial-gradient(ellipse 600px 400px at 85% 20%, rgba(59,130,246,0.06) 0%, transparent 60%);
           pointer-events: none;
         }
+        
         .bg-demo {
-          background:
-            radial-gradient(ellipse 900px 500px at 20% 20%, rgba(59,130,246,0.08) 0%, transparent 60%),
-            radial-gradient(ellipse 700px 400px at 80% 80%, rgba(16,185,129,0.09) 0%, transparent 60%),
-            #FAFBFF;
+          background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 50%, #faf5ff 100%);
+          background-size: 200% 200%;
+          animation: bgShift 18s ease-in-out infinite reverse;
         }
+        
         .bg-sectores {
-          background-color: #FFFFFF;
-          background-image: radial-gradient(circle, rgba(10,14,26,0.06) 1px, transparent 1px);
-          background-size: 24px 24px;
-          position: relative;
+          background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 50%, #f8fafc 100%);
+          background-size: 200% 200%;
+          animation: bgShift 14s ease-in-out infinite;
         }
-        .bg-sectores::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(ellipse 800px 400px at 50% 0%, rgba(16,185,129,0.04) 0%, transparent 70%);
-          pointer-events: none;
-        }
+        
         .bg-roi {
-          background:
-            radial-gradient(ellipse 900px 500px at 25% 30%, rgba(239,68,68,0.06) 0%, transparent 60%),
-            radial-gradient(ellipse 800px 500px at 75% 70%, rgba(16,185,129,0.10) 0%, transparent 60%),
-            #FAFBFF;
+          background: linear-gradient(135deg, #fff1f2 0%, #fff7ed 50%, #ffffff 100%);
+          background-size: 200% 200%;
+          animation: bgShift 16s ease-in-out infinite reverse;
         }
+        
         .bg-como {
-          background:
-            radial-gradient(ellipse 900px 600px at 80% 30%, rgba(16,185,129,0.10) 0%, transparent 60%),
-            radial-gradient(ellipse 600px 400px at 20% 90%, rgba(59,130,246,0.06) 0%, transparent 60%),
-            #F6FDF9;
+          background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 50%, #eff6ff 100%);
+          background-size: 200% 200%;
+          animation: bgShift 15s ease-in-out infinite;
         }
+        
         .bg-instalacion {
-          background:
-            linear-gradient(180deg, rgba(59,130,246,0.04) 0%, transparent 200px),
-            #FFFFFF;
+          background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f0fdf4 100%);
+          background-size: 200% 200%;
+          animation: bgShift 17s ease-in-out infinite reverse;
         }
+        
         .bg-resultados {
-          background:
-            linear-gradient(180deg, rgba(16,185,129,0.03) 0%, transparent 150px),
-            #FFFFFF;
+          background: linear-gradient(135deg, #ffffff 0%, #eff6ff 50%, #f8fafc 100%);
+          background-size: 200% 200%;
+          animation: bgShift 15s ease-in-out infinite;
         }
-        .bg-faq { background: #F8FAFC; }
+        
+        .bg-faq { 
+          background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+        }
+        
         .bg-contacto {
-          background:
-            radial-gradient(ellipse 900px 600px at 80% 90%, rgba(16,185,129,0.08) 0%, transparent 60%),
-            radial-gradient(ellipse 700px 500px at 20% 80%, rgba(59,130,246,0.07) 0%, transparent 60%),
-            #FFFFFF;
+          background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 50%, #eff6ff 100%);
+          background-size: 200% 200%;
+          animation: bgShift 20s ease-in-out infinite reverse;
         }
 
         /* === iPhone X Mockup === */
