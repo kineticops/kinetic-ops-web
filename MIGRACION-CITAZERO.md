@@ -24,15 +24,15 @@ Añadir estos registros al dominio `citazero.com`:
 
 | Tipo  | Nombre | Valor              | TTL   |
 |-------|--------|--------------------|-------|
-| A     | @      | `187.77.175.27`    | Auto  |
-| A     | www    | `187.77.175.27`    | Auto  |
+| A     | @      | `<IP_VPS>`         | Auto  |
+| A     | www    | `<IP_VPS>`         | Auto  |
 
 Esperar propagación (10 min – 2 h). Verificar con:
 ```bash
 dig citazero.com +short
 dig www.citazero.com +short
 ```
-Ambos deben devolver `187.77.175.27`.
+Ambos deben devolver la IP del VPS.
 
 ### 1.3. Avisar a Claude con: "dominio citazero.com comprado y DNS apuntando, lanza migración"
 
@@ -40,7 +40,7 @@ Ambos deben devolver `187.77.175.27`.
 
 ## ⚙️ FASE 2 — Configuración en EasyPanel (lo hace Claude)
 
-Entrar al panel EasyPanel (http://187.77.175.27:3000) y en el servicio **kinetic_ops → nginx**:
+Entrar al panel EasyPanel (puerto 3000 del VPS) y en el servicio **kinetic_ops → nginx**:
 
 1. **Domains → Add domain** → escribir `citazero.com` y `www.citazero.com`.
 2. Activar **HTTPS (Let's Encrypt)** — EasyPanel gestiona la emisión automática del certificado SSL.
@@ -185,7 +185,7 @@ Durante las primeras 24-48h ambos dominios responderán a la vez. Después, kine
 ## ✅ Checklist pre-lanzamiento
 
 - [ ] citazero.com comprado
-- [ ] DNS apunta a 187.77.175.27
+- [ ] DNS apunta a la IP del VPS
 - [ ] `dig citazero.com +short` devuelve la IP correcta
 - [ ] EasyPanel tiene el dominio configurado con SSL
 - [ ] HTML actualizado con nuevo dominio (Claude lo hace)
