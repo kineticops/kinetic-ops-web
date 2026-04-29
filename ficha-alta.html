@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha de Alta · Recepcionista IA · CitaZero</title>
+<meta name="description" content="Formulario de configuración del sistema de Recepcionista IA de CitaZero. Rellénelo y envíelo por WhatsApp para iniciar la implantación.">
+<link rel="canonical" href="https://kineticopss.com/ficha-alta.html">
+<link rel="icon" href="/favicon.ico?v=4" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=4">
+<meta name="theme-color" content="#10B981">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --border: #d8d5cc;
+    --border-focus: #1a1a1a;
+    --text: #1a1a1a;
+    --text-muted: #888880;
+    --text-placeholder: #bbb9b3;
+    --accent: #0047ff;
+    --accent-light: #e8eeff;
+    --wa: #25d366;
+    --wa-dark: #128c7e;
+    --tag-bg: #1a1a1a;
+    --tag-text: #f5f4f0;
+    --input-bg: #fafaf8;
+    --section-num: #0047ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+
+  .page { max-width: 780px; margin: 0 auto; }
+
+  .top-back { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: 24px; letter-spacing: 0.05em; }
+  .top-back:hover { color: var(--text); }
+
+  .doc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1.5px solid var(--border); }
+  .doc-header-left h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.5px; line-height: 1.1; }
+  .doc-header-left h2 { font-size: 14px; font-weight: 400; color: var(--text-muted); margin-top: 4px; letter-spacing: 0.02em; }
+  .doc-header-right { text-align: right; }
+  .version-tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); font-family: 'DM Mono', monospace; font-size: 10px; padding: 4px 8px; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .doc-date { font-size: 12px; color: var(--text-muted); font-family: 'DM Mono', monospace; }
+
+  .info-banner { background: #e8eeff; border-left: 3px solid var(--accent); padding: 14px 18px; margin-bottom: 24px; font-size: 12.5px; line-height: 1.55; color: #2a3a6b; }
+  .info-banner strong { color: var(--accent); }
+
+  .section { background: var(--surface); border: 1.5px solid var(--border); margin-bottom: 24px; overflow: hidden; }
+  .section-header { display: flex; align-items: center; gap: 12px; padding: 18px 24px; border-bottom: 1px solid var(--border); background: #fafaf8; flex-wrap: wrap; }
+  .section-num { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--section-num); background: var(--accent-light); padding: 3px 7px; letter-spacing: 0.05em; flex-shrink: 0; }
+  .section-title { font-size: 15px; font-weight: 600; letter-spacing: -0.2px; flex-shrink: 0; }
+  .section-desc { font-size: 12px; color: var(--text-muted); margin-left: auto; font-style: italic; max-width: 320px; text-align: right; line-height: 1.4; }
+  .section-body { padding: 24px; }
+
+  .field-row { display: grid; gap: 16px; margin-bottom: 16px; }
+  .field-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  .field-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .field-row.cols-1 { grid-template-columns: 1fr; }
+  .field-row:last-child { margin-bottom: 0; }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-family: 'DM Mono', monospace; }
+
+  .field input[type="text"], .field input[type="email"], .field input[type="tel"], .field input[type="number"], .field input[type="time"], .field textarea, .field select {
+    border: 1px solid var(--border); background: var(--input-bg); padding: 9px 12px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 14px; color: var(--text); outline: none; transition: border-color 0.15s, background 0.15s; width: 100%; border-radius: 0; -webkit-appearance: none; appearance: none;
+  }
+  .field textarea { resize: vertical; min-height: 80px; line-height: 1.5; font-family: 'DM Sans', -apple-system, sans-serif; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--border-focus); background: #fff; }
+  .field input::placeholder, .field textarea::placeholder { color: var(--text-placeholder); font-style: italic; }
+
+  .schedule-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .schedule-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 13px; }
+  .schedule-table th { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); background: #fafaf8; font-weight: 500; white-space: nowrap; }
+  .schedule-table td { padding: 6px 6px; border-bottom: 1px solid #f0ede8; vertical-align: middle; }
+  .schedule-table tr:last-child td { border-bottom: none; }
+  .schedule-table td:first-child { font-weight: 500; font-size: 12px; color: var(--text-muted); font-family: 'DM Mono', monospace; padding-left: 10px; white-space: nowrap; }
+  .schedule-table input[type="time"] { border: 1px solid var(--border); background: var(--input-bg); padding: 5px 8px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text); outline: none; width: 100%; min-width: 90px; border-radius: 0; -webkit-appearance: none; }
+  .schedule-table input[type="time"]:focus { border-color: var(--border-focus); background: #fff; }
+
+  .toggle-closed { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+  .toggle-closed input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--accent); cursor: pointer; }
+  .toggle-closed span { font-size: 11px; color: var(--text-muted); font-family: 'DM Mono', monospace; white-space: nowrap; }
+  .day-row.is-closed td:not(:first-child):not(.close-col) input { opacity: 0.25; pointer-events: none; }
+
+  .services-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .services-table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 13px; }
+  .services-table th { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); background: #fafaf8; font-weight: 500; }
+  .services-table td { padding: 6px 6px; border-bottom: 1px solid #f0ede8; vertical-align: middle; }
+  .services-table tr:last-child td { border-bottom: none; }
+  .services-table input[type="text"], .services-table input[type="number"], .services-table textarea { border: 1px solid var(--border); background: var(--input-bg); padding: 6px 10px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 13px; color: var(--text); outline: none; width: 100%; border-radius: 0; -webkit-appearance: none; }
+  .services-table textarea { resize: none; height: 34px; line-height: 1.4; overflow: hidden; }
+  .services-table input:focus, .services-table textarea:focus { border-color: var(--border-focus); background: #fff; }
+  .services-table input::placeholder, .services-table textarea::placeholder { color: var(--text-placeholder); font-style: italic; }
+
+  .del-row-btn { background: none; border: none; cursor: pointer; color: #ccc; font-size: 20px; padding: 4px 8px; line-height: 1; font-family: inherit; }
+  .del-row-btn:hover { color: #d44; }
+  .add-row-btn { display: flex; align-items: center; gap: 6px; margin-top: 12px; background: none; border: 1px dashed var(--border); padding: 10px 14px; cursor: pointer; color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; transition: all 0.15s; width: 100%; justify-content: center; border-radius: 0; }
+  .add-row-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+  .checks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .check-card { border: 1px solid var(--border); padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; transition: border-color 0.15s, background 0.15s; background: var(--input-bg); }
+  .check-card:hover { border-color: #aaa; }
+  .check-card.checked { border-color: var(--accent); background: var(--accent-light); }
+  .check-card input[type="checkbox"] { margin-top: 1px; width: 15px; height: 15px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
+  .check-card-text strong { display: block; font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+  .check-card-text small { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+  .escalado-box { border: 1.5px solid #ffcc00; background: #fffdf0; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; }
+  .escalado-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; font-weight: 700; color: #b58900; }
+  .escalado-box p { font-size: 12px; color: #7a6a00; line-height: 1.5; }
+
+  .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+  .radio-option { display: flex; align-items: center; gap: 7px; border: 1px solid var(--border); padding: 9px 14px; cursor: pointer; font-size: 13px; background: var(--input-bg); transition: all 0.15s; user-select: none; }
+  .radio-option:hover { border-color: #aaa; }
+  .radio-option input[type="radio"] { accent-color: var(--accent); cursor: pointer; }
+  .radio-option.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 500; }
+
+  .firma-box { border-top: 1px solid var(--border); margin-top: 24px; padding-top: 20px; }
+
+  .sign-pad-wrap { margin-top: 32px; border: 1.5px solid var(--border); background: #fff; position: relative; width: 100%; max-width: 440px; }
+  .sign-pad-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--border); background: #fafaf8; }
+  .sign-pad-header span { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .sign-pad-clear { background: none; border: 1px solid var(--border); padding: 4px 10px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: var(--text-muted); cursor: pointer; text-transform: uppercase; }
+  .sign-pad-clear:hover { color: var(--text); border-color: var(--text); }
+  .sign-pad-canvas { display: block; width: 100%; height: 160px; cursor: crosshair; touch-action: none; background: #fff; background-image: linear-gradient(to right, #f5f5f5 1px, transparent 1px), linear-gradient(to bottom, #f5f5f5 1px, transparent 1px); background-size: 20px 20px; }
+  .sign-pad-footer { padding: 8px 12px; border-top: 1px solid var(--border); background: #fafaf8; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+  .sign-pad-footer .stamp-value { color: var(--text); }
+  .sign-pad-footer .stamp-value.empty { color: var(--text-placeholder); font-style: italic; }
+
+  .firma-label { font-size: 11px; color: var(--text-muted); font-family: 'DM Mono', monospace; letter-spacing: 0.06em; margin-top: 8px; }
+
+  .legal-box { margin-top: 20px; padding: 14px 16px; border: 1px solid var(--border); background: var(--input-bg); display: flex; gap: 10px; align-items: flex-start; }
+  .legal-box input[type="checkbox"] { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
+  .legal-box .legal-text { font-size: 12px; line-height: 1.5; color: var(--text); cursor: pointer; }
+  .legal-box .legal-text strong { font-weight: 600; }
+  .legal-box small { display: block; margin-top: 4px; font-size: 10.5px; color: var(--text-muted); line-height: 1.45; }
+
+  .conf-strip { text-align: center; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+  .actions { display: flex; gap: 10px; margin-bottom: 32px; justify-content: flex-end; flex-wrap: wrap; }
+  .btn { border: none; padding: 12px 18px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px; -webkit-tap-highlight-color: transparent; touch-action: manipulation; border-radius: 0; font-weight: 500; text-decoration: none; }
+  .btn-wa { background: var(--wa); color: #fff; }
+  .btn-wa:hover { background: var(--wa-dark); }
+  .btn-print { background: var(--tag-bg); color: var(--tag-text); }
+  .btn-print:hover { background: #333; }
+  .btn-reset { background: none; color: var(--text-muted); border: 1px solid var(--border); }
+  .btn-reset:hover { border-color: #999; color: var(--text); }
+
+  .inline-number { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .inline-number input[type="number"] { width: 80px; border: 1px solid var(--border); background: var(--input-bg); padding: 8px 12px; font-family: 'DM Mono', monospace; font-size: 14px; color: var(--text); outline: none; text-align: center; border-radius: 0; -webkit-appearance: none; }
+  .inline-number input:focus { border-color: var(--border-focus); background: #fff; }
+  .inline-number span { font-size: 13px; color: var(--text-muted); }
+
+  .cancel-hours-row { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+  .cancel-hours-row span { font-size: 13px; color: var(--text-muted); }
+  .cancel-hours-row input[type="number"] { width: 70px; border: 1px solid var(--border); background: var(--input-bg); padding: 7px 10px; font-family: 'DM Mono', monospace; font-size: 13px; color: var(--text); outline: none; text-align: center; border-radius: 0; -webkit-appearance: none; }
+  .cancel-hours-row input:focus { border-color: var(--border-focus); background: #fff; }
+
+  .wa-output { display: none; background: #e5f6e0; border: 2px solid var(--wa); padding: 18px; margin-bottom: 24px; }
+  .wa-output.is-visible { display: block; }
+  .wa-output h3 { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wa-dark); margin-bottom: 10px; }
+  .wa-output textarea { width: 100%; min-height: 240px; border: 1px solid var(--wa); background: #fff; padding: 12px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 13px; line-height: 1.55; color: var(--text); outline: none; resize: vertical; border-radius: 0; -webkit-appearance: none; }
+  .wa-output-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; align-items: center; }
+  .wa-output-hint { font-size: 11.5px; color: var(--wa-dark); margin-top: 10px; line-height: 1.55; background: #fff; padding: 10px 12px; border: 1px dashed var(--wa); }
+  .wa-output-hint strong { font-weight: 600; }
+  .copy-status { font-size: 11px; color: var(--wa-dark); font-family: 'DM Mono', monospace; opacity: 0; transition: opacity 0.2s; }
+  .copy-status.visible { opacity: 1; }
+
+  @media (max-width: 640px) {
+    body { padding: 20px 12px 60px; }
+    .field-row.cols-2, .field-row.cols-3 { grid-template-columns: 1fr; }
+    .checks-grid { grid-template-columns: 1fr; }
+    .doc-header { flex-direction: column; gap: 12px; }
+    .doc-header-right { text-align: left; }
+    .doc-header-left h1 { font-size: 22px; }
+    .section-header { gap: 8px; }
+    .section-desc { margin-left: 0; text-align: left; max-width: 100%; width: 100%; font-size: 11px; }
+    .section-body { padding: 16px; }
+    .actions { justify-content: stretch; }
+    .btn { flex: 1 1 100%; justify-content: center; text-align: center; padding: 14px 10px; }
+    .radio-group { flex-direction: column; }
+    .wa-output-actions .btn { flex: 1 1 100%; }
+  }
+
+  @media print {
+    body { background: white; padding: 10px; font-size: 12px; }
+    .actions, .add-row-btn, .del-row-btn, .wa-output, .info-banner, .top-back { display: none !important; }
+    .section { break-inside: avoid; border: 1px solid #ccc; page-break-inside: avoid; }
+    .schedule-wrap, .services-wrap { overflow: visible; }
+    .schedule-table, .services-table { min-width: unset; }
+    .section-desc { display: block !important; }
+    input, textarea, select { border: none !important; background: transparent !important; padding: 2px 0 !important; }
+    .sign-pad-wrap, .sign-pad-canvas, .legal-box, .check-card.checked { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .sign-pad-wrap { border: 1.5px solid #333 !important; }
+    .sign-pad-canvas { background: #fff !important; background-image: none !important; }
+    .sign-pad-clear { display: none !important; }
+    .check-card.checked { background: #eef3ff !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a href="/" class="top-back">← Volver a CitaZero</a>
+
+  <div class="info-banner">
+    <strong>Cómo enviar:</strong> rellene la ficha, pulse <strong>Generar mensaje</strong> al final. Se copiará el texto automáticamente — vuelva al chat y péguelo. Si prefiere, toque <strong>Abrir WhatsApp</strong> y se abrirá con el mensaje listo.
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn-reset" id="btn-reset">Limpiar</button>
+    <button type="button" class="btn btn-print" id="btn-print">Imprimir / PDF</button>
+    <button type="button" class="btn btn-wa" id="btn-wa-top">Generar mensaje</button>
+  </div>
+
+  <div class="doc-header">
+    <div class="doc-header-left">
+      <h1>Ficha de Alta<br>Recepcionista IA</h1>
+      <h2>Documento de configuración del sistema</h2>
+    </div>
+    <div class="doc-header-right">
+      <div class="version-tag">VERSIÓN 1.0 · 2026</div>
+      <div class="doc-date">Confidencial · <span id="doc-date">—</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Identidad del Negocio</span>
+      <span class="section-desc">La IA usará estos datos en sus respuestas de WhatsApp.</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row cols-2">
+        <div class="field"><label>Nombre Comercial</label><input type="text" data-key="Nombre Comercial" placeholder="Ej: Clínica Dental Pérez"></div>
+        <div class="field"><label>Teléfono Público</label><input type="tel" data-key="Teléfono Público" placeholder="Ej: +34 600 000 000"></div>
+      </div>
+      <div class="field-row cols-2">
+        <div class="field"><label>Sector / Tipo de Negocio</label><input type="text" data-key="Sector" placeholder="Ej: Clínica dental, Peluquería…"></div>
+        <div class="field"><label>Dirección Completa</label><input type="text" data-key="Dirección" placeholder="Ej: Calle Mayor 12, 2º A, 50001 Zaragoza"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Horarios de Atención</span>
+      <span class="section-desc">Formato 24h. Si hay pausa, indique los dos turnos.</span>
+    </div>
+    <div class="section-body">
+      <div class="schedule-wrap">
+        <table class="schedule-table">
+          <thead><tr><th>Día</th><th>Apertura Mañana</th><th>Cierre Mañana</th><th>Apertura Tarde</th><th>Cierre Tarde</th><th class="close-col">Cerrado</th></tr></thead>
+          <tbody id="schedule-body">
+            <tr class="day-row" data-day="Lunes"><td>Lunes</td><td><input type="time" value="09:00"></td><td><input type="time" value="14:00"></td><td><input type="time" value="16:00"></td><td><input type="time" value="20:00"></td><td class="close-col"><label class="toggle-closed"><input type="checkbox"><span>Cerrado</span></label></td></tr>
+            <tr class="day-row" data-day="Martes"><td>Martes</td><td><input type="time" value="09:00"></td><td><input type="time" value="14:00"></td><td><input type="time" value="16:00"></td><td><input type="time" value="20:00"></td><td class="close-col"><label class="toggle-closed"><input type="checkbox"><span>Cerrado</span></label></td></tr>
+            <tr class="day-row" data-day="Miércoles"><td>Miércoles</td><td><input type="time" value="09:00"></td><td><input type="time" value="14:00"></td><td><input type="time" value="16:00"></td><td><input type="time" value="20:00"></td><td class="close-col"><label class="toggle-closed"><input type="checkbox"><span>Cerrado</span></label></td></tr>
+            <tr class="day-row" data-day="Jueves"><td>Jueves</td><td><input type="time" value="09:00"></td><td><input type="time" value="14:00"></td><td><input type="time" value="16:00"></td><td><input type="time" value="20:00"></td><td class="close-col"><label class="toggle-closed"><input type="checkbox"><span>Cerrado</span></label></td></tr>
+            <tr class="day-row" data-day="Viernes"><td>Viernes</td><td><input type="time" value="09:00"></td><td><input type="time" value="14:00"></td><td><input type="time" value="16:00"></td><td><input type="time" value="20:00"></td><td class="close-col"><label class="toggle-closed"><input type="checkbox"><span>Cerrado</span></label></td></tr>
+            <tr class="day-row is-closed" data-day="Sábado"><td>Sábado</td><td><input type="time" value="09:00" disabled></td><td><input type="time" value="14:00" disabled></td><td><input type="time" value="16:00" disabled></td><td><input type="time" value="20:00" disabled></td><td class="close-col"><label class="toggle-closed"><input type="checkbox" checked><span>Cerrado</span></label></td></tr>
+            <tr class="day-row is-closed" data-day="Domingo"><td>Domingo</td><td><input type="time" value="09:00" disabled></td><td><input type="time" value="14:00" disabled></td><td><input type="time" value="16:00" disabled></td><td><input type="time" value="20:00" disabled></td><td class="close-col"><label class="toggle-closed"><input type="checkbox" checked><span>Cerrado</span></label></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Catálogo de Servicios</span>
+      <span class="section-desc">La duración en minutos es crítica para bloquear el hueco en el calendario.</span>
+    </div>
+    <div class="section-body">
+      <div class="services-wrap">
+        <table class="services-table" id="services-table">
+          <thead><tr><th style="width:35%">Nombre del Servicio</th><th style="width:13%">Duración (min)</th><th>Descripción Breve</th><th style="width:36px"></th></tr></thead>
+          <tbody id="services-body">
+            <tr class="service-row"><td><input type="text" placeholder="Ej: Consulta general"></td><td><input type="number" placeholder="60" min="5" max="480" style="text-align:center"></td><td><textarea placeholder="Descripción opcional para el agente…"></textarea></td><td><button type="button" class="del-row-btn" title="Eliminar">&times;</button></td></tr>
+            <tr class="service-row"><td><input type="text" placeholder="Ej: Limpieza dental"></td><td><input type="number" placeholder="45" min="5" max="480" style="text-align:center"></td><td><textarea placeholder="Descripción opcional para el agente…"></textarea></td><td><button type="button" class="del-row-btn" title="Eliminar">&times;</button></td></tr>
+            <tr class="service-row"><td><input type="text" placeholder="Servicio 3"></td><td><input type="number" placeholder="30" min="5" max="480" style="text-align:center"></td><td><textarea placeholder="Descripción opcional para el agente…"></textarea></td><td><button type="button" class="del-row-btn" title="Eliminar">&times;</button></td></tr>
+            <tr class="service-row"><td><input type="text" placeholder="Servicio 4"></td><td><input type="number" placeholder="30" min="5" max="480" style="text-align:center"></td><td><textarea placeholder="Descripción opcional para el agente…"></textarea></td><td><button type="button" class="del-row-btn" title="Eliminar">&times;</button></td></tr>
+            <tr class="service-row"><td><input type="text" placeholder="Servicio 5"></td><td><input type="number" placeholder="30" min="5" max="480" style="text-align:center"></td><td><textarea placeholder="Descripción opcional para el agente…"></textarea></td><td><button type="button" class="del-row-btn" title="Eliminar">&times;</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="add-row-btn" id="add-service-btn">+ Añadir servicio</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Datos que recogerá la IA</span>
+      <span class="section-desc">Marque los campos que el bot debe pedir. Menos campos = mayor conversión.</span>
+    </div>
+    <div class="section-body">
+      <div class="checks-grid" id="checks-grid">
+        <label class="check-card checked"><input type="checkbox" checked data-key="Nombre completo"><div class="check-card-text"><strong>Nombre completo</strong><small>Recomendado. Se usa para personalizar el mensaje.</small></div></label>
+        <label class="check-card checked"><input type="checkbox" checked data-key="Número de teléfono"><div class="check-card-text"><strong>Número de teléfono</strong><small>Se extrae automáticamente de WhatsApp.</small></div></label>
+        <label class="check-card"><input type="checkbox" data-key="Correo electrónico"><div class="check-card-text"><strong>Correo electrónico</strong><small>Útil para enviar confirmaciones por email.</small></div></label>
+        <label class="check-card"><input type="checkbox" data-key="Fecha de nacimiento"><div class="check-card-text"><strong>Fecha de nacimiento</strong><small>Recomendado para clínicas y centros médicos.</small></div></label>
+        <label class="check-card"><input type="checkbox" data-key="Notas o motivo"><div class="check-card-text"><strong>Notas o motivo de visita</strong><small>El paciente puede añadir contexto libre.</small></div></label>
+        <label class="check-card"><input type="checkbox" data-key="Historial previo"><div class="check-card-text"><strong>Historial previo</strong><small>¿Es primera visita o cliente recurrente?</small></div></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Escalado Humano</span>
+      <span class="section-desc">Alerta automática vía Gmail cuando el bot no sepa responder.</span>
+    </div>
+    <div class="section-body">
+      <div class="escalado-box">
+        <span class="escalado-icon">!</span>
+        <p>Cuando el bot no sepa responder o detecte una urgencia, enviará una alerta automática a esta dirección vía Gmail.</p>
+      </div>
+      <div class="field-row cols-2">
+        <div class="field"><label>Email de Alerta</label><input type="email" data-key="Email Alerta" placeholder="gestor@tunegocio.com"></div>
+        <div class="field"><label>Email de Copia (CC)</label><input type="email" data-key="Email CC" placeholder="Opcional"></div>
+      </div>
+      <div class="field-row cols-1">
+        <div class="field"><label>¿Cuándo debe avisar?</label><input type="text" data-key="Cuándo avisar" placeholder="Ej: Solo cuando el bot no entienda al cliente más de 2 veces seguidas"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">Reglas Especiales</span>
+      <span class="section-desc">Esta información se inyecta directamente en el prompt del agente.</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row cols-2">
+        <div class="field"><label>Antelación mínima para reservar</label><div class="inline-number"><input type="number" value="24" min="0" max="168" id="antelacion-input" data-key="Antelación mínima (horas)"><span>horas antes de la cita</span></div></div>
+        <div class="field"><label>Máximo de citas por día</label><input type="number" placeholder="Ej: 12" min="1" id="max-citas-input" data-key="Máx. citas/día"></div>
+      </div>
+      <div class="field-row cols-1" style="margin-top:4px">
+        <div class="field"><label>Días Festivos / Cierres Especiales</label><textarea data-key="Festivos" placeholder="Ej: 25 Dic, 1 Ene, 15 Ago (Asunción)&#10;Semana del 14-18 Abr cerrado por vacaciones"></textarea></div>
+      </div>
+      <div class="field-row cols-1">
+        <div class="field">
+          <label>¿Aceptar cancelaciones por WhatsApp?</label>
+          <div class="radio-group" id="cancel-radio">
+            <label class="radio-option"><input type="radio" name="cancelaciones" value="Sí"> Sí</label>
+            <label class="radio-option"><input type="radio" name="cancelaciones" value="No"> No</label>
+            <label class="radio-option"><input type="radio" name="cancelaciones" value="Con antelación"> Solo con antelación de</label>
+          </div>
+          <div class="cancel-hours-row"><input type="number" placeholder="h" min="1" max="168" id="cancel-hours" data-key="Cancelación antelación (horas)"><span>horas</span></div>
+        </div>
+      </div>
+      <div class="field-row cols-1">
+        <div class="field"><label>Instrucciones especiales para la IA</label><textarea rows="4" data-key="Instrucciones IA" placeholder="Ej: Si el cliente pregunta por el precio antes de reservar, deriva siempre a la recepcionista.&#10;No confirmar más de 1 cita al mismo teléfono el mismo día."></textarea></div>
+      </div>
+
+      <div class="firma-box">
+        <div class="field-row cols-2">
+          <div class="field"><label>Nombre y Cargo del Responsable</label><input type="text" data-key="Responsable" placeholder="Ej: María García, Directora"></div>
+          <div class="field"><label>DNI / NIF</label><input type="text" data-key="DNI" placeholder="Ej: 12345678A"></div>
+        </div>
+        <div class="field-row cols-2">
+          <div class="field"><label>Fecha</label><input type="text" id="firma-date" data-key="Fecha" placeholder="dd/mm/aaaa"></div>
+          <div class="field"><label>Lugar</label><input type="text" data-key="Lugar" placeholder="Ej: Zaragoza"></div>
+        </div>
+
+        <div class="sign-pad-wrap">
+          <div class="sign-pad-header"><span>Firma del responsable</span><button type="button" class="sign-pad-clear" id="sign-clear">Borrar</button></div>
+          <canvas class="sign-pad-canvas" id="sign-canvas"></canvas>
+          <div class="sign-pad-footer"><span>Firme con el dedo o el ratón dentro del recuadro</span><span>Hash: <span class="stamp-value empty" id="sign-hash">sin firma</span></span></div>
+        </div>
+        <div class="firma-label" id="sign-timestamp">Sin firmar</div>
+
+        <div class="legal-box">
+          <input type="checkbox" id="legal-accept" data-key="Aceptación">
+          <label for="legal-accept" class="legal-text">
+            <strong>Declaro que los datos aportados son veraces y acepto la contratación del servicio.</strong>
+            <small>Firma electrónica conforme al Reglamento (UE) 910/2014 (eIDAS) y a la Ley 6/2020. Al marcar esta casilla y firmar en el recuadro superior se genera una firma electrónica simple con valor probatorio. Conserve el PDF firmado como prueba contractual.</small>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wa-output" id="wa-output">
+    <h3>Mensaje listo para WhatsApp</h3>
+    <textarea id="wa-text" readonly></textarea>
+    <div class="wa-output-actions">
+      <button type="button" class="btn btn-wa" id="btn-copy">Copiar texto</button>
+      <a class="btn btn-wa" id="btn-open-wa" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+      <span class="copy-status" id="copy-status">✓ Copiado</span>
+    </div>
+    <div class="wa-output-hint">
+      <strong>Si está viendo esto dentro de WhatsApp:</strong><br>
+      1. Mantenga pulsado el texto de arriba → <strong>Seleccionar todo</strong> → <strong>Copiar</strong><br>
+      2. Vuelva al chat y <strong>pegue</strong> el mensaje<br>
+      Si el botón "Abrir WhatsApp" no responde, use la opción 1.
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn-reset" id="btn-reset-2">Limpiar</button>
+    <button type="button" class="btn btn-print" id="btn-print-2">Imprimir / PDF</button>
+    <button type="button" class="btn btn-wa" id="btn-wa-bottom">Generar mensaje</button>
+  </div>
+
+  <div class="conf-strip">Confidencial · Los datos se usarán únicamente para la configuración del sistema de IA</div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  try {
+    const now = new Date();
+    document.getElementById('doc-date').textContent = now.toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+    document.getElementById('firma-date').placeholder = now.toLocaleDateString('es-ES');
+  } catch (e) {}
+
+  document.querySelectorAll('#schedule-body tr.day-row').forEach(tr => {
+    const cb = tr.querySelector('.toggle-closed input');
+    if (!cb) return;
+    cb.addEventListener('change', function() {
+      const closed = cb.checked;
+      tr.classList.toggle('is-closed', closed);
+      tr.querySelectorAll('input[type="time"]').forEach(i => i.disabled = closed);
+    });
+  });
+
+  const servicesTbody = document.getElementById('services-body');
+  function wireDelete(btn) {
+    btn.addEventListener('click', function() {
+      const tr = btn.closest('tr');
+      if (tr) tr.remove();
+    });
+  }
+  servicesTbody.querySelectorAll('.del-row-btn').forEach(wireDelete);
+
+  document.getElementById('add-service-btn').addEventListener('click', function() {
+    const tr = document.createElement('tr');
+    tr.className = 'service-row';
+    tr.innerHTML = '<td><input type="text" placeholder="Nombre del servicio"></td><td><input type="number" placeholder="30" min="5" max="480" style="text-align:center"></td><td><textarea placeholder="Descripción opcional para el agente…"></textarea></td><td><button type="button" class="del-row-btn" title="Eliminar">&times;</button></td>';
+    servicesTbody.appendChild(tr);
+    wireDelete(tr.querySelector('.del-row-btn'));
+  });
+
+  document.querySelectorAll('.check-card').forEach(card => {
+    const cb = card.querySelector('input[type="checkbox"]');
+    cb.addEventListener('change', function() { card.classList.toggle('checked', cb.checked); });
+  });
+
+  document.querySelectorAll('.radio-group').forEach(group => {
+    group.querySelectorAll('.radio-option').forEach(opt => {
+      const radio = opt.querySelector('input[type="radio"]');
+      radio.addEventListener('change', function() {
+        group.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+        if (radio.checked) opt.classList.add('selected');
+      });
+    });
+  });
+
+  const canvas = document.getElementById('sign-canvas');
+  const ctx = canvas.getContext('2d');
+  const signTimestamp = document.getElementById('sign-timestamp');
+  const signHash = document.getElementById('sign-hash');
+  let signed = false;
+  let signedAt = null;
+  let drawing = false;
+  let lastX = 0, lastY = 0;
+
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const ratio = window.devicePixelRatio || 1;
+    const prev = signed ? canvas.toDataURL() : null;
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+    ctx.scale(ratio, ratio);
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#0a1a2f';
+    if (prev) {
+      const img = new Image();
+      img.onload = () => ctx.drawImage(img, 0, 0, rect.width, rect.height);
+      img.src = prev;
+    }
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+  }
+
+  function startDraw(e) {
+    e.preventDefault();
+    drawing = true;
+    const p = getPos(e);
+    lastX = p.x; lastY = p.y;
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    ctx.lineTo(p.x + 0.1, p.y + 0.1);
+    ctx.stroke();
+    markSigned();
+  }
+  function moveDraw(e) {
+    if (!drawing) return;
+    e.preventDefault();
+    const p = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    lastX = p.x; lastY = p.y;
+  }
+  function endDraw() {
+    if (!drawing) return;
+    drawing = false;
+    updateHash();
+  }
+
+  function markSigned() {
+    if (signed) return;
+    signed = true;
+    signedAt = new Date();
+    const f = signedAt.toLocaleString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    signTimestamp.textContent = 'Firmado el ' + f;
+    signTimestamp.style.color = 'var(--wa-dark)';
+  }
+
+  function simpleHash(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) {
+      h = ((h << 5) - h) + str.charCodeAt(i);
+      h |= 0;
+    }
+    const hex = (h >>> 0).toString(16).padStart(8, '0');
+    return hex.toUpperCase();
+  }
+  function updateHash() {
+    try {
+      const data = canvas.toDataURL();
+      const h = simpleHash(data + (signedAt ? signedAt.toISOString() : ''));
+      signHash.textContent = h;
+      signHash.classList.remove('empty');
+    } catch (e) {}
+  }
+
+  canvas.addEventListener('mousedown', startDraw);
+  canvas.addEventListener('mousemove', moveDraw);
+  window.addEventListener('mouseup', endDraw);
+  canvas.addEventListener('touchstart', startDraw, { passive: false });
+  canvas.addEventListener('touchmove', moveDraw, { passive: false });
+  canvas.addEventListener('touchend', endDraw);
+  canvas.addEventListener('touchcancel', endDraw);
+
+  document.getElementById('sign-clear').addEventListener('click', function() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    signed = false;
+    signedAt = null;
+    signTimestamp.textContent = 'Sin firmar';
+    signTimestamp.style.color = '';
+    signHash.textContent = 'sin firma';
+    signHash.classList.add('empty');
+  });
+
+  function keyVal(key) {
+    const el = document.querySelector('[data-key="' + key + '"]');
+    if (!el) return '';
+    if (el.type === 'checkbox') return el.checked ? 'Sí' : 'No';
+    return (el.value || '').trim();
+  }
+
+  function buildSummary() {
+    const lines = [];
+    lines.push('*FICHA DE ALTA — RECEPCIONISTA IA*');
+    lines.push('');
+    lines.push('*01 · Identidad*');
+    lines.push('• Nombre: ' + (keyVal('Nombre Comercial') || '—'));
+    lines.push('• Teléfono: ' + (keyVal('Teléfono Público') || '—'));
+    lines.push('• Sector: ' + (keyVal('Sector') || '—'));
+    lines.push('• Dirección: ' + (keyVal('Dirección') || '—'));
+    lines.push('');
+    lines.push('*02 · Horarios*');
+    document.querySelectorAll('#schedule-body tr.day-row').forEach(tr => {
+      const day = tr.getAttribute('data-day');
+      const closed = tr.querySelector('.toggle-closed input').checked;
+      if (closed) { lines.push('• ' + day + ': Cerrado'); }
+      else {
+        const t = tr.querySelectorAll('input[type="time"]');
+        const m1 = t[0].value, m2 = t[1].value, a1 = t[2].value, a2 = t[3].value;
+        const parts = [];
+        if (m1 && m2) parts.push(m1 + '–' + m2);
+        if (a1 && a2) parts.push(a1 + '–' + a2);
+        lines.push('• ' + day + ': ' + (parts.join(' / ') || '—'));
+      }
+    });
+    lines.push('');
+    lines.push('*03 · Servicios*');
+    let hasService = false;
+    document.querySelectorAll('#services-body tr.service-row').forEach(tr => {
+      const inputs = tr.querySelectorAll('input, textarea');
+      const name = (inputs[0].value || '').trim();
+      const dur = (inputs[1].value || '').trim();
+      const desc = (inputs[2].value || '').trim();
+      if (name || dur || desc) {
+        hasService = true;
+        let line = '• ' + (name || '(sin nombre)');
+        if (dur) line += ' — ' + dur + ' min';
+        if (desc) line += ' — ' + desc;
+        lines.push(line);
+      }
+    });
+    if (!hasService) lines.push('—');
+    lines.push('');
+    lines.push('*04 · Datos que recoge*');
+    const checks = [];
+    document.querySelectorAll('#checks-grid input[type="checkbox"]').forEach(cb => {
+      if (cb.checked) checks.push(cb.getAttribute('data-key'));
+    });
+    lines.push(checks.length ? checks.join(', ') : '—');
+    lines.push('');
+    lines.push('*05 · Escalado*');
+    lines.push('• Email alerta: ' + (keyVal('Email Alerta') || '—'));
+    const cc = keyVal('Email CC'); if (cc) lines.push('• CC: ' + cc);
+    const when = keyVal('Cuándo avisar'); if (when) lines.push('• Cuándo: ' + when);
+    lines.push('');
+    lines.push('*06 · Reglas*');
+    lines.push('• Antelación mínima: ' + (keyVal('Antelación mínima (horas)') || '—') + ' h');
+    const maxc = keyVal('Máx. citas/día'); if (maxc) lines.push('• Máx. citas/día: ' + maxc);
+    const fest = keyVal('Festivos'); if (fest) lines.push('• Festivos: ' + fest.replace(/\n/g, ' | '));
+    const cancel = document.querySelector('input[name="cancelaciones"]:checked');
+    if (cancel) {
+      let c = '• Cancelaciones: ' + cancel.value;
+      if (cancel.value === 'Con antelación') {
+        const h = keyVal('Cancelación antelación (horas)');
+        if (h) c += ' (' + h + ' h)';
+      }
+      lines.push(c);
+    }
+    const instr = keyVal('Instrucciones IA');
+    if (instr) lines.push('• Instrucciones: ' + instr.replace(/\n/g, ' | '));
+    lines.push('');
+    lines.push('*Firma y validación*');
+    lines.push('• Responsable: ' + (keyVal('Responsable') || '—'));
+    const dni = keyVal('DNI'); if (dni) lines.push('• DNI/NIF: ' + dni);
+    const lugar = keyVal('Lugar'); if (lugar) lines.push('• Lugar: ' + lugar);
+    lines.push('• Fecha: ' + (keyVal('Fecha') || '—'));
+    const acept = document.getElementById('legal-accept').checked;
+    lines.push('• Aceptación legal: ' + (acept ? 'Sí' : 'No'));
+    if (signed && signedAt) {
+      lines.push('• Firma electrónica: Sí — ' + signedAt.toLocaleString('es-ES'));
+      lines.push('• Hash firma: ' + signHash.textContent);
+    } else {
+      lines.push('• Firma electrónica: No firmado');
+    }
+    lines.push('');
+    lines.push('_Firma electrónica simple (eIDAS / Ley 6/2020). El PDF firmado es la prueba contractual válida._');
+    return lines.join('\n');
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).then(() => true).catch(() => fallbackCopy(text));
+    }
+    return Promise.resolve(fallbackCopy(text));
+  }
+  function fallbackCopy(text) {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.top = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) { return false; }
+  }
+
+  const waOutput = document.getElementById('wa-output');
+  const waText = document.getElementById('wa-text');
+  const waLink = document.getElementById('btn-open-wa');
+  const copyStatus = document.getElementById('copy-status');
+
+  function generate() {
+    const accepted = document.getElementById('legal-accept').checked;
+    if (!signed || !accepted) {
+      const missing = [];
+      if (!signed) missing.push('firmar en el recuadro');
+      if (!accepted) missing.push('marcar la casilla de aceptación');
+      const proceed = confirm('Falta ' + missing.join(' y ') + '. Sin eso el documento no tiene validez legal. ¿Generar igualmente?');
+      if (!proceed) return;
+    }
+    const text = buildSummary();
+    waText.value = text;
+    waOutput.classList.add('is-visible');
+    waLink.href = 'https://wa.me/34711234171?text=' + encodeURIComponent(text);
+
+    copyText(text).then(ok => {
+      if (ok) {
+        copyStatus.classList.add('visible');
+        setTimeout(() => copyStatus.classList.remove('visible'), 3500);
+      }
+    });
+
+    waOutput.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => { try { waText.focus(); waText.select(); } catch (e) {} }, 400);
+  }
+
+  document.getElementById('btn-wa-top').addEventListener('click', generate);
+  document.getElementById('btn-wa-bottom').addEventListener('click', generate);
+
+  document.getElementById('btn-copy').addEventListener('click', function() {
+    copyText(waText.value).then(ok => {
+      copyStatus.textContent = ok ? '✓ Copiado' : '✗ No se pudo copiar — selecciona y copia manualmente';
+      copyStatus.classList.add('visible');
+      setTimeout(() => copyStatus.classList.remove('visible'), 3500);
+    });
+  });
+
+  function doPrint() { window.print(); }
+  document.getElementById('btn-print').addEventListener('click', doPrint);
+  document.getElementById('btn-print-2').addEventListener('click', doPrint);
+
+  function doReset() {
+    if (!confirm('¿Borrar todos los datos introducidos?')) return;
+    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(el => el.value = '');
+    document.querySelectorAll('textarea').forEach(el => el.value = '');
+    document.querySelectorAll('input[type="number"]').forEach(el => { el.value = el.id === 'antelacion-input' ? '24' : ''; });
+    const defaultTimes = ['09:00','14:00','16:00','20:00'];
+    const defaultClosed = [false,false,false,false,false,true,true];
+    document.querySelectorAll('#schedule-body tr.day-row').forEach((tr, i) => {
+      tr.querySelectorAll('input[type="time"]').forEach((t, ti) => t.value = defaultTimes[ti]);
+      const cb = tr.querySelector('.toggle-closed input');
+      cb.checked = defaultClosed[i];
+      cb.dispatchEvent(new Event('change'));
+    });
+    document.querySelectorAll('.check-card').forEach((card, i) => {
+      const cb = card.querySelector('input[type="checkbox"]');
+      cb.checked = i < 2;
+      card.classList.toggle('checked', i < 2);
+    });
+    document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    document.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+    document.getElementById('legal-accept').checked = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    signed = false;
+    signedAt = null;
+    signTimestamp.textContent = 'Sin firmar';
+    signTimestamp.style.color = '';
+    signHash.textContent = 'sin firma';
+    signHash.classList.add('empty');
+    waOutput.classList.remove('is-visible');
+    waText.value = '';
+  }
+  document.getElementById('btn-reset').addEventListener('click', doReset);
+  document.getElementById('btn-reset-2').addEventListener('click', doReset);
+})();
+</script>
+</body>
+</html>
